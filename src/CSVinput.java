@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 
 public class CSVinput {
@@ -13,7 +12,7 @@ public class CSVinput {
     BufferedReader br = null;
     String line = "";
     String cvsSplitBy = ";";
-    ArrayList<String[]> dates = new ArrayList<>();
+    public ArrayList<String[]> dates = new ArrayList<>();
 
     public CSVinput() {
         this.csvFile = "C:\\Users\\cicho\\Desktop\\SoftwareProjekt\\Softwareprojekt-main\\Daten\\scenario_1.csv";
@@ -46,6 +45,7 @@ public class CSVinput {
             for (int j = 0; j <dates.size(); j++){
                 System.out.println(Arrays.toString(dates.get(j)));
             }
+
 
             //System.out.println(dates.get(2)[0]);
             //
