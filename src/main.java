@@ -19,17 +19,20 @@ public class main {
         CSVinput w = new CSVinput();
         w.read();
         NWA analyse = new NWA();
-        analyse.nutzwertAnalyse(w.getDates());
-         */
+        analyse.nutzwertMultiply(w.getDates());
+*/
+
         fileChoice f = new fileChoice();
         if(f.getEnd().equals("csv")){
             System.out.println("CSV");
             CSVinput w = new CSVinput(f.getPath());
             w.read();
             NWA analyse = new NWA();
-            analyse.nutzwertAnalyse(w.getDates());
+            analyse.nutzwertMultiply(w.getDates());
         }else if(f.getEnd().equals("txt")){
             System.out.println("TXT");
+            TXTinput w = new TXTinput(f.getPath());
+            w.read();
         }else{
             System.out.println("HERBERT Dieses Dateiformat ist nicht gültig");
         }
