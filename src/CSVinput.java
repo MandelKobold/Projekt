@@ -40,6 +40,7 @@ public class CSVinput {
                 if (shouldRemoveCSVSingleLine(strings)) {
                     iterator.remove();
                 }
+
             }
 
             for (int j = 0; j <dates.size(); j++){
