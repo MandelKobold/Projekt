@@ -29,6 +29,6 @@ public class main {
             System.out.println("HERBERT Dieses Dateiformat ist nicht gültig");
         }*/
         NWA analyse = new NWA();
-        analyse.nutzwertAnalyse(w.getDates());
+        analyse.nutzwertMultiply(w.getDates());
     }
 }
