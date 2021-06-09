@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 
 public class fileChoice {
     /*
@@ -7,7 +8,8 @@ public class fileChoice {
     Passende input klasse aufrufen
      */
     // JFileChooser-Objekt erstellen
-    private JFileChooser chooser = new JFileChooser();
+    //private JFileChooser chooser = new JFileChooser();
+    private JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
     private int rueckgabeWert;
     private String end = "";
     private String path;

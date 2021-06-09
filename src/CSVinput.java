@@ -15,7 +15,8 @@ public class CSVinput {
     public ArrayList<String[]> dates = new ArrayList<>();
 
     public CSVinput() {
-        this.csvFile = "C:\\Users\\cicho\\Desktop\\SoftwareProjekt\\Softwareprojekt-main\\Daten\\scenario_1.csv";
+        //this.csvFile = "C:\\Users\\cicho\\Desktop\\SoftwareProjekt\\Softwareprojekt-main\\Daten\\scenario_1.csv";
+        this.csvFile = "G:\\Studium\\Semester4\\Softwareprojekt\\Projekt\\Daten\\scenario_1.csv";
     }
     public CSVinput(String path) {
         this.csvFile = path;
@@ -28,8 +29,6 @@ public class CSVinput {
             while ((line = br.readLine()) != null) {
                 // use comma as separator
                 dates.add(line.split(cvsSplitBy));
-
-
                 //System.out.println(Arrays.toString(dates.get(i)));
                 i++;
             }
@@ -49,7 +48,6 @@ public class CSVinput {
 
 
             //System.out.println(dates.get(2)[0]);
-            //
             // System.out.println(dates.get(0)[0]);
 
         } catch (FileNotFoundException e) {
