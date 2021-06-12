@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public class NWA {
 
+    ArrayList<double[]> nwa;
+
     public NWA(ArrayList<String[]> dates) {
     }
 
@@ -24,7 +26,6 @@ public class NWA {
         }
         int i1;
         int i2;
-
 
         for (i1 =2; i1<dates.size(); i1++) {
             if (i1 % 7 == 0) {
@@ -44,10 +45,9 @@ public class NWA {
             }
             ret.add(multiplied);
 
-
         }
         for (int j = 0; j < ret.size(); j++) {
-            System.out.println(Arrays.toString(ret.get(j)));
+           System.out.println(Arrays.toString(ret.get(j)));
         }
         nutzwertAdd(ret);
 
@@ -64,19 +64,20 @@ public class NWA {
             int j = 0;
 
             while(dates.get(j)[i] != -1.0){
-                    round = (int)(dates.get(j)[i]*100);
-                    addition += round;
-
-
+                round = (int)(dates.get(j)[i]*100);
+                addition += round;
                 j++;
             }
             add[i] = addition/100;
             ret.add(add);
-
         }
         for (int k = 0; k < ret.size(); k++) {
             System.out.println(Arrays.toString(ret.get(k)));
         }
+        this.nwa = ret;
+    }
 
+    public ArrayList<double[]> getNwa() {
+        return nwa;
     }
 }

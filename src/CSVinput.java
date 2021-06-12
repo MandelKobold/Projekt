@@ -12,7 +12,7 @@ public class CSVinput {
     BufferedReader br = null;
     String line = "";
     String cvsSplitBy = ";";
-    public ArrayList<String[]> dates = new ArrayList<>();
+    private ArrayList<String[]> dates = new ArrayList<>();
 
     public CSVinput() {
         //this.csvFile = "C:\\Users\\cicho\\Desktop\\SoftwareProjekt\\Softwareprojekt-main\\Daten\\scenario_1.csv";

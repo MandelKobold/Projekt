@@ -5,11 +5,11 @@ public class main {
     /*
     gucken, ob wir eine CSV Datei haben
     dann:
-        CSV Datei einlesen
+        CSV Datei einlesen -> NWA -> CMAA -> Ausgabe
     sonst:
         gucken ob wir eine txt Datei haben
         dann:
-            txt Datei einlesen
+            txt Datei einlesen -> NWA -> CMAA -> Ausgabe
             sonst:
                 Fehlermeldung
      */
@@ -29,7 +29,11 @@ public class main {
             w.read();
             NWA analyse = new NWA();
             analyse.nutzwertMultiply(w.getDates());
-        }else if(f.getEnd().equals("txt")){
+            //CMAA a = new CMAA(analyse.getNwa());
+            //a.test(w.getDates());
+            formatDates form = new formatDates();
+            form.format(w.getDates());
+            }else if(f.getEnd().equals("txt")){
             System.out.println("TXT");
             TXTinput w = new TXTinput(f.getPath());
             w.read();
