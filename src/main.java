@@ -28,15 +28,19 @@ public class main {
             CSVinput w = new CSVinput(f.getPath());
             w.read();
             NWA analyse = new NWA();
-            analyse.nutzwertMultiply(w.getDates());
-            //CMAA a = new CMAA(analyse.getNwa());
+            //analyse.nutzwertMultiply(w.getDates());
+
             //a.test(w.getDates());
             formatDates form = new formatDates();
             form.format(w.getDates());
+            CMAA cmaa = new CMAA(form.getRet());
+            analyse.nutzwertMultiply(form.getRet());
             }else if(f.getEnd().equals("txt")){
             System.out.println("TXT");
             TXTinput w = new TXTinput(f.getPath());
             w.read();
+            formatDates form = new formatDates();
+            form.format(w.getDates());
         }else{
             System.out.println("HERBERT Dieses Dateiformat ist nicht gültig");
         }

@@ -17,23 +17,18 @@ public class NWA {
     }
 
     //hier nutzwertanalyse bitte
-    public void nutzwertMultiply(ArrayList<String[]> dates){
+    public void nutzwertMultiply(ArrayList<double[]> dates){
         ArrayList<double[]> ret = new ArrayList<>();
-        double[] multiplied = new double[dates.get(2).length-2];
-        double[] platz = new double[multiplied.length];
+        double[] platz = new double[dates.get(2).length-2];
         for (int i = 0; i < platz.length; i++) {
             platz[i] = -1.0;
         }
-        int i1;
-        int i2;
 
-        for (i1 =2; i1<dates.size(); i1++) {
-            if (i1 % 7 == 0) {
-                ret.add(platz);
-                i1 = i1 + 2;
-            }
+        for (int i = 0; i<dates.size(); i++) {
 
-            for (i2 = 2; i2 <dates.get(2).length; i2++) {
+            double[] multiplied = new double[dates.get(2).length-2];
+            for (int j = 2; j <dates.get(2).length; j++) {
+            /*
                 BigDecimal weight = new BigDecimal(Double.parseDouble(dates.get(i1)[0].replace(",", "."))).setScale(2, RoundingMode.HALF_UP);
                 //System.out.println("weight:"+weight.toString());
                 BigDecimal value = new BigDecimal(Double.parseDouble(dates.get(i1)[i2].replace(",", "."))).setScale(2, RoundingMode.HALF_UP);
@@ -42,10 +37,14 @@ public class NWA {
                 //System.out.println("multiply:"+multiply);
 
                 multiplied[i2-2] = multiply.doubleValue();
+            */
+                multiplied[j-2] = dates.get(i)[0]*dates.get(i)[j];
+
             }
             ret.add(multiplied);
 
         }
+        System.out.println("NWA");
         for (int j = 0; j < ret.size(); j++) {
            System.out.println(Arrays.toString(ret.get(j)));
         }
@@ -53,24 +52,24 @@ public class NWA {
 
     }
     public void nutzwertAdd(ArrayList<double[]> dates){
-
         double addition;
         ArrayList<double[]> ret = new ArrayList<>();
-        double[] add = new double[dates.get(2).length];
         int round;
+        double[] add = new double[dates.get(2).length];
 
         for (int i = 0; i < dates.get(2).length; i++){
             addition = 0.0;
             int j = 0;
 
-            while(dates.get(j)[i] != -1.0){
+            while(dates.get(j)[i] != 1.0){
                 round = (int)(dates.get(j)[i]*100);
                 addition += round;
                 j++;
             }
             add[i] = addition/100;
-            ret.add(add);
+
         }
+        ret.add(add);
         for (int k = 0; k < ret.size(); k++) {
             System.out.println(Arrays.toString(ret.get(k)));
         }

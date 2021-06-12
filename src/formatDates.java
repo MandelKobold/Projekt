@@ -39,4 +39,7 @@ public class formatDates {
 
     }
 
+    public ArrayList<double[]> getRet() {
+        return ret;
+    }
 }

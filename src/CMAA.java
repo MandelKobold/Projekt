@@ -3,14 +3,14 @@ import java.util.Arrays;
 
 public class CMAA {
 
-    ArrayList<double[]> nwa;
-    public CMAA(ArrayList<double[]> nwa) {
-        this.nwa = nwa;
+    ArrayList<double[]> dates;
+    public CMAA(ArrayList<double[]> dates) {
+        this.dates = dates;
     }
 
     /*
     Idee:
-    prüfen, ob es unterschiede gibt, bei den Bewertungen, wenn es unterschiede gibt, den Ort merken.
+    prüfen, ob es unterschiede gibt, bei den Bewertungen, wenn es Unterschiede gibt, den Ort und die werte merken, damit das bei der NWA beachtet werden kann
 
 
      */
