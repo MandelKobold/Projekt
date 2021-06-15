@@ -10,7 +10,8 @@ public class formatDates {
     void format(ArrayList<String[]> dates){
         double[] platz = new double[dates.get(2).length];
         //Platzhalter zwischen den DMs
-        for (int i = 0; i < platz.length; i++) {
+        platz[0] = 1.0;
+        for (int i = 1; i < platz.length; i++) {
             platz[i] = -1.0;
         }
         //beginnend mit den Bewertungen vom ersten dm jede Zeile durch gehen

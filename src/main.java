@@ -27,14 +27,16 @@ public class main {
             System.out.println("CSV");
             CSVinput w = new CSVinput(f.getPath());
             w.read();
-            NWA analyse = new NWA();
-            //analyse.nutzwertMultiply(w.getDates());
-
-            //a.test(w.getDates());
             formatDates form = new formatDates();
             form.format(w.getDates());
             CMAA cmaa = new CMAA(form.getRet());
-            analyse.nutzwertMultiply(form.getRet());
+            cmaa.compare();
+
+            /*
+            NWA nwa = new NWA(form.getRet());
+            nwa.nutzwertMultiply();
+            */
+
             }else if(f.getEnd().equals("txt")){
             System.out.println("TXT");
             TXTinput w = new TXTinput(f.getPath());

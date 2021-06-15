@@ -7,9 +7,11 @@ import java.util.Arrays;
 
 public class NWA {
 
+    ArrayList<double[]> dates;
     ArrayList<double[]> nwa;
 
-    public NWA(ArrayList<String[]> dates) {
+    public NWA(ArrayList<double[]> dates) {
+        this.dates = dates;
     }
 
     public NWA() {
@@ -17,41 +19,23 @@ public class NWA {
     }
 
     //hier nutzwertanalyse bitte
-    public void nutzwertMultiply(ArrayList<double[]> dates){
-        ArrayList<double[]> ret = new ArrayList<>();
-        double[] platz = new double[dates.get(2).length-2];
-        for (int i = 0; i < platz.length; i++) {
-            platz[i] = -1.0;
-        }
-
+    public void nutzwertMultiply(){
+        ArrayList<double[]> multnwa = new ArrayList<>();
+        //alle Gewichte mit Bewertungen multiplizieren
         for (int i = 0; i<dates.size(); i++) {
-
             double[] multiplied = new double[dates.get(2).length-2];
             for (int j = 2; j <dates.get(2).length; j++) {
-            /*
-                BigDecimal weight = new BigDecimal(Double.parseDouble(dates.get(i1)[0].replace(",", "."))).setScale(2, RoundingMode.HALF_UP);
-                //System.out.println("weight:"+weight.toString());
-                BigDecimal value = new BigDecimal(Double.parseDouble(dates.get(i1)[i2].replace(",", "."))).setScale(2, RoundingMode.HALF_UP);
-                //System.out.println("value:"+value.toString());
-                BigDecimal multiply = new BigDecimal(weight.doubleValue() * value.doubleValue()).setScale(2, RoundingMode.HALF_UP);
-                //System.out.println("multiply:"+multiply);
-
-                multiplied[i2-2] = multiply.doubleValue();
-            */
                 multiplied[j-2] = dates.get(i)[0]*dates.get(i)[j];
-
             }
-            ret.add(multiplied);
-
+            multnwa.add(multiplied);
         }
-        System.out.println("NWA");
-        for (int j = 0; j < ret.size(); j++) {
-           System.out.println(Arrays.toString(ret.get(j)));
+        for (int j = 0; j <multnwa.size() ; j++) {
+            System.out.println(Arrays.toString(multnwa.get(j)));
         }
-        nutzwertAdd(ret);
+        //nutzwertAdd();
 
     }
-    public void nutzwertAdd(ArrayList<double[]> dates){
+    public void nutzwertAdd(){
         double addition;
         ArrayList<double[]> ret = new ArrayList<>();
         int round;
