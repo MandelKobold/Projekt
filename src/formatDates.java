@@ -33,10 +33,13 @@ public class formatDates {
             }
             ret.add(werte);
         }
+        /*
+        System.out.println("Herbert diese Werte sind formatiert");
         for (int k = 0; k < ret.size(); k++) {
-            //System.out.println("Herbert");
+
             System.out.println(Arrays.toString(ret.get(k)));
         }
+         */
 
     }
 

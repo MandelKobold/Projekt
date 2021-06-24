@@ -3,25 +3,20 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.SocketHandler;
 
 
 public class NWA {
 
     ArrayList<double[]> dates;
     ArrayList<double[]> nwa;
-
-    public NWA(ArrayList<double[]> dates) {
-        this.dates = dates;
-    }
-
-    public NWA() {
-
-    }
+    public NWA() {}
 
     //hier nutzwertanalyse bitte
     public void nutzwertMultiply(){
         ArrayList<double[]> multnwa = new ArrayList<>();
         //alle Gewichte mit Bewertungen multiplizieren
+
         for (int i = 0; i<dates.size(); i++) {
             double[] multiplied = new double[dates.get(2).length-2];
             for (int j = 2; j <dates.get(2).length; j++) {
@@ -29,35 +24,62 @@ public class NWA {
             }
             multnwa.add(multiplied);
         }
+
+        /*
+        System.out.println("NWA multipliziert");
         for (int j = 0; j <multnwa.size() ; j++) {
             System.out.println(Arrays.toString(multnwa.get(j)));
         }
-        //nutzwertAdd();
+         */
+        nutzwertAdd(multnwa);
 
     }
-    public void nutzwertAdd(){
-        double addition;
-        ArrayList<double[]> ret = new ArrayList<>();
-        int round;
-        double[] add = new double[dates.get(2).length];
-
-        for (int i = 0; i < dates.get(2).length; i++){
-            addition = 0.0;
-            int j = 0;
-
-            while(dates.get(j)[i] != 1.0){
-                round = (int)(dates.get(j)[i]*100);
-                addition += round;
-                j++;
+    void nutzwertAdd(ArrayList<double[]> multnwa){
+        double singelSum = 0.0;
+        ArrayList<Double> result = new ArrayList<>();
+        for (int i = 0; i < multnwa.get(0).length; i++) {
+            for (int j = 0; j <multnwa.size() ; j++) {
+                singelSum += multnwa.get(j)[i];
             }
-            add[i] = addition/100;
+            //Daten Formatieren
+            singelSum *=100;
+            int caster = (int) singelSum;
+            singelSum = caster;
+            singelSum /=100;
+            //Summen zur Ergebnisliste adden
+            result.add(singelSum);
+            singelSum = 0;
+        }
+        System.out.println("NWA FINALY");
+        System.out.println(result.toString());
+    }
 
+    public void prepareNWA(ArrayList<double[]> AGG, ArrayList<ArrayList<Double>> rndmWeteAGG){
+        // um die alte AGG zu behalten brauchen wir ein deep copy
+        ArrayList<double[]> newAGG = new ArrayList<>();
+        for (int i = 0; i <AGG.size() ; i++) {
+            double[] row = Arrays.copyOf(AGG.get(i),AGG.get(i).length);
+            newAGG.add(row);
         }
-        ret.add(add);
-        for (int k = 0; k < ret.size(); k++) {
-            System.out.println(Arrays.toString(ret.get(k)));
+        //neue AGG durchgehen und einen passenden Zufallswert inserten
+        for (int i = 0; i < newAGG.size(); i++) {
+            for (int j = 0; j <newAGG.get(i).length ; j++) {
+                if(newAGG.get(i)[j] > 1){
+                    int index = (int) newAGG.get(i)[j];
+                    //index des random Werts aussuchen
+                    int chooseRndmWert = (int) (Math.random()*10)%rndmWeteAGG.get(index).size();
+                    newAGG.get(i)[j] = rndmWeteAGG.get(index).get(chooseRndmWert);
+                }
+            }
         }
-        this.nwa = ret;
+        /*
+        System.out.println("READY FOR SOME NWA ACTION");
+        for (int i = 0; i < AGG.size(); i++) {
+            System.out.println(Arrays.toString(AGG.get(i)));
+        }
+        */
+        this.dates = newAGG;
+
     }
 
     public ArrayList<double[]> getNwa() {

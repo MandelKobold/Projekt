@@ -25,17 +25,22 @@ public class main {
         fileChoice f = new fileChoice();
         if(f.getEnd().equals("csv")){
             System.out.println("CSV");
+            //Datei einlesen
             CSVinput w = new CSVinput(f.getPath());
             w.read();
+            //Datei zum verarbeiten vorbereiten
             formatDates form = new formatDates();
             form.format(w.getDates());
+            //AGG erstellen
             CMAA cmaa = new CMAA(form.getRet());
             cmaa.compare();
+            //NWA aufrufen mit zufälligen Werten aus der AGG
+            NWA nwa = new NWA();
+            for (int i = 0; i <10 ; i++) {
+                nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
+                nwa.nutzwertMultiply();
+            }
 
-            /*
-            NWA nwa = new NWA(form.getRet());
-            nwa.nutzwertMultiply();
-            */
 
             }else if(f.getEnd().equals("txt")){
             System.out.println("TXT");

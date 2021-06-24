@@ -41,14 +41,13 @@ public class CSVinput {
                 }
 
             }
-
+            /*
+            System.out.println("CSV Input");
             for (int j = 0; j <dates.size(); j++){
                 System.out.println(Arrays.toString(dates.get(j)));
             }
+             */
 
-
-            //System.out.println(dates.get(2)[0]);
-            // System.out.println(dates.get(0)[0]);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

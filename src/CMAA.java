@@ -4,6 +4,9 @@ import java.util.Arrays;
 public class CMAA {
 
     ArrayList<double[]> dates;
+    ArrayList<double[]> AGG;
+    ArrayList<ArrayList<Double>> rndmWeteAGG;
+
     public CMAA(ArrayList<double[]> dates) {
         this.dates = dates;
     }
@@ -15,67 +18,100 @@ public class CMAA {
 
     //Unterschiedliche DMs in einzelne ArrayListen werfen, damit man die vergleichen kann
     ArrayList<ArrayList<double[]>> split(){
-        ArrayList<double[]> dm = new ArrayList<>();
-        ArrayList<ArrayList<double[]>> cm = new ArrayList<>();
+        ArrayList<double[]> dmMatrix = new ArrayList<>();
+        ArrayList<ArrayList<double[]>> listeMitDMMatritzen = new ArrayList<>();
         for (int i = 0; i < dates.size(); i++) {
             if(i == 0 || dates.get(i)[1]==-1.0) {
-                dm = new ArrayList<>();
-                cm.add(dm);
+                if(dates.get(i)[1]==-1.0){
+                    i++;
+                }
+                dmMatrix = new ArrayList<>();
+                listeMitDMMatritzen.add(dmMatrix);
             }
-            dm.add(dates.get(i));
+            dmMatrix.add(dates.get(i));
 
         }
+        /*
         System.out.println("SPLIT");
-        for (int i = 0; i <cm.size() ; i++) {
-            System.out.println("Herbert die ist eine Arrayliste");
-            for (int j = 0; j < cm.get(i).size(); j++) {
-                System.out.println(Arrays.toString(cm.get(i).get(j)));
+        for (int i = 0; i <listeMitDMMatritzen.size() ; i++) {
+            System.out.println("Herbert dies ist eine Arrayliste");
+            for (int j = 0; j < listeMitDMMatritzen.get(i).size(); j++) {
+                System.out.println(Arrays.toString(listeMitDMMatritzen.get(i).get(j)));
             }
         }
-        return cm;
+        */
+        return listeMitDMMatritzen;
     }
 
     void compare(){
-        ArrayList<ArrayList<double[]>> dates = split();
-        ArrayList<double[]> nwaready = new ArrayList<>();
-        for (int i = 0; i <dates.size() ; i++) {
-            double[] date = new double[dates.get(0).get(0).length];
-            nwaready.add(date);
-            for (int j = 0; j < date.length; j++) {
-                date[j] = -5;
-            }
+        ArrayList<ArrayList<double[]>> listeMitDMMatritzen = split();
+        AGG = new ArrayList<>();
+        for (int i = 0; i <listeMitDMMatritzen.get(0).size() ; i++) {
+            double[] date = new double[listeMitDMMatritzen.get(0).get(0).length];
+            AGG.add(date);
+            Arrays.fill(date,-5);
         }
-        ArrayList<ArrayList<Double>> rndm = new ArrayList<>();
+        rndmWeteAGG = new ArrayList<>();
         ArrayList<Double> f = new ArrayList<>(); //filler to begin ArrayList with index 2
-        rndm.add(f);
-        rndm.add(f);
-        double cmpr = -1;
+        rndmWeteAGG.add(f);
+        rndmWeteAGG.add(f);
+        double cmpr;
         int count = 2;
-        for (int i = 0; i < dates.get(0).size() -1; i++) //inner ArrayList ablaufen
+        boolean different = false;
+        for (int i = 0; i < listeMitDMMatritzen.get(0).size(); i++) //inner ArrayList ablaufen
         {
-            for (int j = 0; j <dates.get(0).get(0).length ; j++) //Array ablaufen
+            for (int j = 0; j <listeMitDMMatritzen.get(0).get(0).length ; j++) //Array ablaufen
             {
-                for (int k = 0; k < dates.size(); k++) //outer ArryList ablaufen
+                ArrayList<Double> listeDerWerteDieSichUnterscheiden = new ArrayList<>();
+                for (int k = 0; k < listeMitDMMatritzen.size(); k++) //outer ArryList ablaufen
                 {
-                    cmpr = dates.get(0).get(i)[j];
+                    //ersten Wert als vergleichswert speichern
+                    cmpr = listeMitDMMatritzen.get(0).get(i)[j];
                     //wenn das Gewicht/die Bewertung vom ersten dm von einem anderen dm abweicht neue ArrayList erstellen und Gewicht aufnehmen
-                    boolean different = false;
-                    if(dates.get(k).get(i)[j] != cmpr){
-                        ArrayList<Double> d = new ArrayList<>();
+                    if(listeMitDMMatritzen.get(k).get(i)[j] != cmpr && listeMitDMMatritzen.get(k).get(i)[j] != -1 ){
+                        //wenn ein Unterschied gefunden wurde, muss der Wert aus der ersten Matrix beim ersten mal mit in die Liste der gemerkten Unterschiede
                         if(!different) {
-                            d.add(cmpr);
+                            listeDerWerteDieSichUnterscheiden.add(cmpr);
                             different = true;
                         }
-                        d.add(dates.get(k).get(i)[j]);
-                        rndm.add(d);
+                        //verhindern, dass doppelte Werte gespeichert werden
+                        if(!listeDerWerteDieSichUnterscheiden.contains(listeMitDMMatritzen.get(k).get(i)[j])) {
+                            listeDerWerteDieSichUnterscheiden.add(listeMitDMMatritzen.get(k).get(i)[j]);
+                        }
+                        rndmWeteAGG.add(listeDerWerteDieSichUnterscheiden);
                     }
                 }
+                //wenn wir einen unterschied gefunden haben müssen wir an die Stelle den Marker für die Liste setzen, ansonsten den Wert
+                if(different){
+                    AGG.get(i)[j] = count;
+                    count++;
+                }else {
+                    AGG.get(i)[j] = listeMitDMMatritzen.get(0).get(i)[j];
+                }
+                //for next field in the matrix the difference ist false
+                different = false;
             }
         }
-        for (int i = 0; i <nwaready.size() ; i++) {
-            System.out.println(Arrays.toString(nwaready.get(i)));
+        /*
+        System.out.println("AGG mit Platzhalter");
+        for (int i = 0; i <AGG.size() ; i++) {
+            System.out.println(Arrays.toString(AGG.get(i)));
         }
+         */
+        /*
+        System.out.println("rndm werte fuer AGG");
+        for (int i = 0; i < rndmWeteAGG.size(); i++) {
+            System.out.println(rndmWeteAGG.get(i).toString());
+        }
+         */
 
     }
 
+    public ArrayList<ArrayList<Double>> getRndmWeteAGG() {
+        return rndmWeteAGG;
+    }
+
+    public ArrayList<double[]> getAGG() {
+        return AGG;
+    }
 }

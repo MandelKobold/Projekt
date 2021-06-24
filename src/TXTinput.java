@@ -46,7 +46,7 @@ public class TXTinput {
                 System.out.println(Arrays.toString(dates.get(j)));
             }
 
-
+            //TODO Daten formatieren, um sie verarbeitbar zu machen (
             //System.out.println(dates.get(6)[0]);
             //System.out.println(dates.get(0)[0]);
 
