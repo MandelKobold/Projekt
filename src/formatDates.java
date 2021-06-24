@@ -40,7 +40,6 @@ public class formatDates {
             System.out.println(Arrays.toString(ret.get(k)));
         }
          */
-
     }
 
     public ArrayList<double[]> getRet() {

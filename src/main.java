@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class main {
 
@@ -35,11 +35,26 @@ public class main {
             CMAA cmaa = new CMAA(form.getRet());
             cmaa.compare();
             //NWA aufrufen mit zufälligen Werten aus der AGG
+
             NWA nwa = new NWA();
-            for (int i = 0; i <10 ; i++) {
+            nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
+            nwa.nutzwertMultiply();
+            //zaelen wer akzeptiert wurde
+            rankacceptabilitymatrix ram = new rankacceptabilitymatrix(nwa.getResult());
+            int[][] rankAcceptability = ram.ranking();
+            //System.out.println(nwa.getResult().toString());
+
+            for (int i = 1; i <10000 ; i++) {
+                nwa = new NWA();
                 nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
                 nwa.nutzwertMultiply();
+                //zaelen wer akzeptiert wurde
+                ram = new rankacceptabilitymatrix(nwa.getResult(),rankAcceptability);
+                ram.ranking();
+                //System.out.println(nwa.getResult().toString());
             }
+            System.out.println("Rank Acceptability Matrix:");
+            System.out.println(Arrays.deepToString(ram.getRankAcceptability()));
 
 
             }else if(f.getEnd().equals("txt")){

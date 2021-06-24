@@ -9,7 +9,7 @@ import java.util.logging.SocketHandler;
 public class NWA {
 
     ArrayList<double[]> dates;
-    ArrayList<double[]> nwa;
+    ArrayList<Double> result;
     public NWA() {}
 
     //hier nutzwertanalyse bitte
@@ -36,7 +36,7 @@ public class NWA {
     }
     void nutzwertAdd(ArrayList<double[]> multnwa){
         double singelSum = 0.0;
-        ArrayList<Double> result = new ArrayList<>();
+        result = new ArrayList<>();
         for (int i = 0; i < multnwa.get(0).length; i++) {
             for (int j = 0; j <multnwa.size() ; j++) {
                 singelSum += multnwa.get(j)[i];
@@ -50,8 +50,10 @@ public class NWA {
             result.add(singelSum);
             singelSum = 0;
         }
+        /*
         System.out.println("NWA FINALY");
         System.out.println(result.toString());
+         */
     }
 
     public void prepareNWA(ArrayList<double[]> AGG, ArrayList<ArrayList<Double>> rndmWeteAGG){
@@ -82,7 +84,7 @@ public class NWA {
 
     }
 
-    public ArrayList<double[]> getNwa() {
-        return nwa;
+    public ArrayList<Double> getResult() {
+        return result;
     }
 }
