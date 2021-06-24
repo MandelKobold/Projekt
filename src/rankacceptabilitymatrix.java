@@ -21,7 +21,7 @@ public class rankacceptabilitymatrix {
         }
     }
 
-    //TODO Die Daten, aus der NWA aufarbeiten
+    //Die Daten, aus der NWA aufarbeiten
     int[][] ranking() {
 
         for (int i = 0; i < dataForRanking.length; i++) {

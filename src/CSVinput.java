@@ -15,8 +15,8 @@ public class CSVinput {
     private ArrayList<String[]> dates = new ArrayList<>();
 
     public CSVinput() {
-        //this.csvFile = "C:\\Users\\cicho\\Desktop\\SoftwareProjekt\\Softwareprojekt-main\\Daten\\scenario_1.csv";
-        this.csvFile = "G:\\Studium\\Semester4\\Softwareprojekt\\Projekt\\Daten\\scenario_1.csv";
+        //this.csvFile = "D:\\UniVideos\\Semester_4\\Programmierparadigmen\\Übungen\\Programmieraufgaben\\Scala\\Woche_7\\SoftwareProjekt\\Daten\\scenario_1.csv";
+        //this.csvFile = "G:\\Studium\\Semester4\\Softwareprojekt\\Projekt\\Daten\\scenario_1.csv";
     }
     public CSVinput(String path) {
         this.csvFile = path;
@@ -41,12 +41,11 @@ public class CSVinput {
                 }
 
             }
-            /*
-            System.out.println("CSV Input");
+
+            /*System.out.println("CSV Input");
             for (int j = 0; j <dates.size(); j++){
                 System.out.println(Arrays.toString(dates.get(j)));
-            }
-             */
+            }*/
 
 
         } catch (FileNotFoundException e) {

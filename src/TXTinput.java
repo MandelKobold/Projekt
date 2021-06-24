@@ -28,10 +28,12 @@ public class TXTinput {
             int i = 0;
             while ((line = br.readLine()) != null) {
                 // use comma as separator
+
                 dates.add(line.split(cvsSplitBy));
                 //System.out.println(Arrays.toString(dates.get(i)));
                 i++;
             }
+            //TODO Daten formatieren, um sie verarbeitbar zu machen
 
             Iterator<String[]> iterator = dates.iterator();
             while (iterator.hasNext()) {
@@ -46,7 +48,7 @@ public class TXTinput {
                 System.out.println(Arrays.toString(dates.get(j)));
             }
 
-            //TODO Daten formatieren, um sie verarbeitbar zu machen (
+
             //System.out.println(dates.get(6)[0]);
             //System.out.println(dates.get(0)[0]);
 
@@ -68,7 +70,7 @@ public class TXTinput {
 
     boolean shouldRemoveCSVSingleLine(String[] csvSingleLine) {
         for (String str : csvSingleLine) {
-            if (str != null && !str.equals("")) {
+            if (str != null && !str.equals(" ") || !str.equals(",")) {
                 return false;
             }
         }
