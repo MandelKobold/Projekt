@@ -15,12 +15,12 @@ public class main {
      */
 
     public static void main(String[] args) {
-        /*
-        CSVinput w = new CSVinput();
-        w.read();
-        NWA analyse = new NWA();
-        analyse.nutzwertMultiply(w.getDates());
-*/
+
+        //CSVinput wz = new CSVinput();
+        //wz.read();
+        //NWA analyse = new NWA();
+        //analyse.nutzwertMultiply(w.getDates());
+
 
         fileChoice f = new fileChoice();
         if(f.getEnd().equals("csv")){
