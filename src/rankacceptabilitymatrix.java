@@ -34,10 +34,10 @@ public class rankacceptabilitymatrix {
             }
 
         }
-        /*
+/*
         System.out.println("Ranka");
         System.out.println(Arrays.deepToString(rankAcceptability));
-         */
+*/
         return rankAcceptability;
     }
 
