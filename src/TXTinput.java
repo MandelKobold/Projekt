@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.lang.StringBuilder;
 
 public class TXTinput {
 
     String csvFile;
+
     BufferedReader br = null;
     String line = "";
     String cvsSplitBy = "\t";
@@ -26,23 +28,38 @@ public class TXTinput {
 
             br = new BufferedReader(new FileReader(csvFile));
             int i = 0;
+
             while ((line = br.readLine()) != null) {
-                // use comma as separator
+                if (line.length() > 2 && !line.isEmpty() && !line.trim().equals("") && !line.trim().equals("\n")) {
+                    // use comma as separator
 
-                dates.add(line.split(cvsSplitBy));
-                //System.out.println(Arrays.toString(dates.get(i)));
-                i++;
-            }
-            //TODO Daten formatieren, um sie verarbeitbar zu machen
-
-            Iterator<String[]> iterator = dates.iterator();
-            while (iterator.hasNext()) {
-                String[] strings = iterator.next();
-                if (shouldRemoveCSVSingleLine(strings)) {
-                    iterator.remove();
+                    dates.add(line.trim().split(cvsSplitBy));
+                    //System.out.println(Arrays.toString(dates.get(i)));
+                    i++;
+                }else {
+                    i++;
                 }
-
             }
+            //Daten formatieren, um sie verarbeitbar zu machen
+
+            for (int k = 0; k < dates.size(); k++){
+                for (int l = 0; l < dates.get(k).length; l++) {
+                    char[] leerzeichenArray = dates.get(k)[l].toCharArray();
+                    String leerzeichenloserString = "";
+                    for (int m = 0; m < leerzeichenArray.length; m++) {
+
+                        if(leerzeichenArray[m] >= '0'&& leerzeichenArray[m] <= '9'||leerzeichenArray[m] == ','||leerzeichenArray[m] == 'D'||leerzeichenArray[m] == 'G'||leerzeichenArray[m] == 'c'||leerzeichenArray[m] == 'a'){
+                            leerzeichenloserString += leerzeichenArray[m];
+                            System.out.println(leerzeichenArray[m]);
+                        }
+                    }
+                    //System.out.println(leerzeichenloserString);
+                    dates.get(k)[l] = leerzeichenloserString;
+                    //System.out.println(dates.get(k)[l]);
+                }
+            }
+
+
 
             for (int j = 0; j <dates.size(); j++){
                 System.out.println(Arrays.toString(dates.get(j)));
@@ -66,15 +83,6 @@ public class TXTinput {
             }
         }
 
-    }
-
-    boolean shouldRemoveCSVSingleLine(String[] csvSingleLine) {
-        for (String str : csvSingleLine) {
-            if (str != null && !str.equals(" ") || !str.equals(",")) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public ArrayList<String[]> getDates() {
