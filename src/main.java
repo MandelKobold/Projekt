@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Arrays;
 
 public class main {
@@ -14,7 +15,7 @@ public class main {
                 Fehlermeldung
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         //CSVinput wz = new CSVinput();
         //wz.read();
@@ -55,6 +56,8 @@ public class main {
             }
             System.out.println("Rank Acceptability Matrix:");
             System.out.println(Arrays.deepToString(ram.getRankAcceptability()));
+            CSVOutput ret = new CSVOutput();
+            ret.OutputCSV(ram.getRankAcceptability());
 
 
             }else if(f.getEnd().equals("txt")){
@@ -84,6 +87,8 @@ public class main {
                 ram = new rankacceptabilitymatrix(nwa.getResult(), rankAcceptability);
                 ram.ranking();
                 //System.out.println(nwa.getResult().toString());
+                CSVOutput ret = new CSVOutput();
+                ret.OutputCSV(ram.getRankAcceptability());
             }
             System.out.println("Rank Acceptability Matrix:");
             System.out.println(Arrays.deepToString(ram.getRankAcceptability()));
