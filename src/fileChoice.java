@@ -13,6 +13,7 @@ public class fileChoice {
     private int rueckgabeWert;
     private String end = "";
     private String path;
+    boolean cancel = false;
     public fileChoice()
     {
         // Dialog zum Oeffnen von Dateien anzeigen
@@ -20,16 +21,19 @@ public class fileChoice {
         /* Abfrage, ob auf "Open" geklickt wurde */
         if(rueckgabeWert == JFileChooser.APPROVE_OPTION)
         {
-            //
             String t = chooser.getSelectedFile().getName();
             char[] tl = t.toCharArray();
             path = chooser.getSelectedFile().getAbsolutePath();
             for (int i = tl.length-3; i < tl.length ; i++) {
                 end += tl[i];
             }
+        }else if(rueckgabeWert == JFileChooser.CANCEL_OPTION){
+            cancel = true;
         }
     }
-
+    public boolean getCancel(){
+        return cancel;
+    }
     public String getEnd() {
         return end;
     }

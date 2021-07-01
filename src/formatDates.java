@@ -39,12 +39,39 @@ public class formatDates {
             ret.add(werte);
         }
 
+
         System.out.println("Herbert diese Werte sind formatiert");
         for (int k = 0; k < ret.size(); k++) {
 
             System.out.println(Arrays.toString(ret.get(k)));
         }
 
+    }
+
+    public boolean gewichtungenPruefen(){
+        boolean gewichtung = false;
+        for (int i = 0; i <ret.size() ; i++) {
+            if(ret.get(i)[0] < 0 || ret.get(i)[0] > 1){
+                gewichtung = true;
+                break;
+            }
+        }
+        return gewichtung;
+    }
+
+    public boolean bewertungenPruefen(){
+        boolean bewertung = false;
+        for (int i = 0; i <ret.size() ; i++) {
+            for (int j = 2; j <ret.get(i).length ; j++) {
+                if(ret.get(i)[j] < 0 || ret.get(i)[j] > 1){
+                    if(ret.get(i)[1] == -2) {
+                        bewertung = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return bewertung;
     }
 
     public ArrayList<double[]> getRet() {
