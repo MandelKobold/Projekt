@@ -47,14 +47,14 @@ public class formatDates {
 
             ret.add(werte);
         }
-
-
+        //Output der Matrix in der nur noch Double drin stehen
+        /*
         System.out.println("Herbert diese Werte sind formatiert");
         for (int k = 0; k < ret.size(); k++) {
 
             System.out.println(Arrays.toString(ret.get(k)));
         }
-
+        */
     }
 
     public boolean gewichtungenPruefen(){

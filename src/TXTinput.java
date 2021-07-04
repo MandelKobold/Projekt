@@ -18,7 +18,7 @@ public class TXTinput {
 
     public TXTinput() {
         //this.csvFile = "C:\\Users\\cicho\\Desktop\\SoftwareProjekt\\Softwareprojekt-main\\Daten\\scenario_1.csv";
-        this.csvFile = "G:\\Studium\\Semester4\\Softwareprojekt\\Projekt\\Daten\\scenario_1.csv";
+        //this.csvFile = "G:\\Studium\\Semester4\\Softwareprojekt\\Projekt\\Daten\\scenario_1.csv";
     }
     public TXTinput(String path) {
         this.csvFile = path;

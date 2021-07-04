@@ -16,7 +16,7 @@ public class CSVinput {
 
     public CSVinput() {
         //this.csvFile = "D:\\UniVideos\\Semester_4\\Programmierparadigmen\\Übungen\\Programmieraufgaben\\Scala\\Woche_7\\SoftwareProjekt\\Daten\\scenario_1.csv";
-        //this.csvFile = "G:\\Studium\\Semester4\\Softwareprojekt\\Projekt\\Daten\\scenario_1.csv";
+        //this.csvFile = "G:\\Studium\\Semester4\\Softwareprojekt\\Projekt\\Daten\\scenario_111.csv";
     }
     public CSVinput(String path) {
         this.csvFile = path;

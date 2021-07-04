@@ -62,14 +62,7 @@ public class rankacceptabilitymatrix {
                 }
             }
         }
-        System.out.println(index.toString());
-        //sollte
-        /*
-        if(index.contains(42.42)){
-            index = highest();
-        }
-
-         */
+        //System.out.println(index.toString());
         return index;
     }
 

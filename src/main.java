@@ -18,6 +18,7 @@ public class main {
     public static void  main(String[] args) throws IOException {
 
         fileChoice f = new fileChoice();
+
         if(f.getEnd().equals("csv")){
             System.out.println("CSV");
             //Datei einlesen
@@ -108,7 +109,6 @@ public class main {
             er.setVisible(true);
             System.out.println("HERBERT Dieses Dateiformat ist nicht gültig");
         }
-
 
     }
 

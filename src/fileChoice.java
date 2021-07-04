@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 public class fileChoice {
@@ -16,6 +17,8 @@ public class fileChoice {
     boolean cancel = false;
     public fileChoice()
     {
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
+        chooser.addChoosableFileFilter(new FileNameExtensionFilter("*.csv", "csv"));
         // Dialog zum Oeffnen von Dateien anzeigen
         rueckgabeWert = chooser.showOpenDialog(null);
         /* Abfrage, ob auf "Open" geklickt wurde */

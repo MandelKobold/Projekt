@@ -41,7 +41,7 @@ public class ErrorMessage extends JFrame implements ActionListener {
 
     void addButtonOk(){
         buttonOk = new JButton("Ok");
-        buttonOk.setBounds(350,80,100,25);
+        buttonOk.setBounds(200,80,100,25);
         buttonOk.addActionListener(this);
         panel.add(buttonOk);
     }
