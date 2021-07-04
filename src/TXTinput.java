@@ -70,14 +70,20 @@ public class TXTinput {
             //System.out.println(dates.get(0)[0]);
 
         } catch (FileNotFoundException e) {
+            ErrorMessage er = new ErrorMessage(false, "Diese Datei konnte nicht gefunden werden");
+            er.setVisible(true);
             e.printStackTrace();
         } catch (IOException e) {
+            ErrorMessage er = new ErrorMessage(false, "Diese Datei konnte nicht gelesen werden");
+            er.setVisible(true);
             e.printStackTrace();
         } finally {
             if (br != null) {
                 try {
                     br.close();
                 } catch (IOException e) {
+                    ErrorMessage er = new ErrorMessage(false, "Beim Lesen der Datei ist ein Fehler aufgetreten");
+                    er.setVisible(true);
                     e.printStackTrace();
                 }
             }

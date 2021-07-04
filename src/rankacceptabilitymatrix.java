@@ -43,8 +43,8 @@ public class rankacceptabilitymatrix {
 
     //den highest Wert finden
     ArrayList<Integer> highest() {
-        double max = 0.0;
-        int inMax = -1;
+        double max = 0.0;       //der maximale Wert
+        int inMax = -1;         //index des maximalen wertes
         //Liste mit den indexen der Alternativen, die am ehesten Akzeptiert werden
         ArrayList<Integer> index = new ArrayList<>();
         for (int i = 0; i < dataForRanking.length; i++) {
@@ -62,7 +62,14 @@ public class rankacceptabilitymatrix {
                 }
             }
         }
-        //System.out.println(index.toString());
+        System.out.println(index.toString());
+        //sollte
+        /*
+        if(index.contains(42.42)){
+            index = highest();
+        }
+
+         */
         return index;
     }
 

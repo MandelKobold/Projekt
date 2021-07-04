@@ -13,7 +13,7 @@ public class CMAA {
 
     /*
     Idee:
-    prüfen, ob es unterschiede gibt, bei den Bewertungen, wenn es Unterschiede gibt, den Ort und die werte merken, damit das bei der NWA beachtet werden kann
+    prüfen, ob es unterschiede gibt, bei den Bewertungen, wenn es Unterschiede gibt, den Ort und die Werte merken, damit das bei der NWA beachtet werden kann
      */
 
     //Unterschiedliche DMs in einzelne ArrayListen werfen, damit man die vergleichen kann
@@ -31,6 +31,7 @@ public class CMAA {
             dmMatrix.add(dates.get(i));
 
         }
+        //Output um sich anzusehen, wie die getrennten DMs aussehen
         /*
         System.out.println("SPLIT");
         for (int i = 0; i <listeMitDMMatritzen.size() ; i++) {
@@ -44,8 +45,9 @@ public class CMAA {
     }
 
     void compare(){
-        ArrayList<ArrayList<double[]>> listeMitDMMatritzen = split();
+        ArrayList<ArrayList<double[]>> listeMitDMMatritzen = split(); // Dms trennen
         AGG = new ArrayList<>();
+        //Arrays mit negativen werten füllen
         for (int i = 0; i <listeMitDMMatritzen.get(0).size() ; i++) {
             double[] date = new double[listeMitDMMatritzen.get(0).get(0).length];
             AGG.add(date);
@@ -65,8 +67,15 @@ public class CMAA {
                 ArrayList<Double> listeDerWerteDieSichUnterscheiden = new ArrayList<>();
                 for (int k = 0; k < listeMitDMMatritzen.size(); k++) //outer ArryList ablaufen
                 {
-                    //ersten Wert als vergleichswert speichern
+                    //ersten Wert als vergleichswert speichern, wenn er nicht empty (42.0) ist
                     cmpr = listeMitDMMatritzen.get(0).get(i)[j];
+                    for (int l = 1; l <listeMitDMMatritzen.size() ; l++) {
+                        if(cmpr == 42.42){
+                            cmpr = listeMitDMMatritzen.get(l).get(i)[j];
+                        }else {
+                            break;
+                        }
+                    }
                     //wenn das Gewicht/die Bewertung vom ersten dm von einem anderen dm abweicht neue ArrayList erstellen und Gewicht aufnehmen
                     if(listeMitDMMatritzen.get(k).get(i)[j] != cmpr && listeMitDMMatritzen.get(k).get(i)[j] != -1 ){
                         //wenn ein Unterschied gefunden wurde, muss der Wert aus der ersten Matrix beim ersten mal mit in die Liste der gemerkten Unterschiede
@@ -74,14 +83,14 @@ public class CMAA {
                             listeDerWerteDieSichUnterscheiden.add(cmpr);
                             different = true;
                         }
-                        //verhindern, dass doppelte Werte gespeichert werden
-                        if(!listeDerWerteDieSichUnterscheiden.contains(listeMitDMMatritzen.get(k).get(i)[j])) {
+                        //verhindern, dass doppelte Werte gespeichert werden, indem getestet wird, ob der Wert, der gespeichert werden soll schon vorhanden ist
+                        if(!listeDerWerteDieSichUnterscheiden.contains(listeMitDMMatritzen.get(k).get(i)[j]) && listeMitDMMatritzen.get(k).get(i)[j] != 42.0) {
                             listeDerWerteDieSichUnterscheiden.add(listeMitDMMatritzen.get(k).get(i)[j]);
                         }
                         rndmWeteAGG.add(listeDerWerteDieSichUnterscheiden);
                     }
                 }
-                //wenn wir einen unterschied gefunden haben müssen wir an die Stelle den Marker für die Liste setzen, ansonsten den Wert
+                //wenn wir einen Unterschied gefunden haben: an die Stelle Marker für die Liste (rndmWeteAGG) setzen, ansonsten den Wert
                 if(different){
                     AGG.get(i)[j] = count;
                     count++;
@@ -92,18 +101,21 @@ public class CMAA {
                 different = false;
             }
         }
+        //Output um sich die AGG mit Platzhaltern anzusehen
         /*
         System.out.println("AGG mit Platzhalter");
         for (int i = 0; i <AGG.size() ; i++) {
             System.out.println(Arrays.toString(AGG.get(i)));
         }
-         */
+        */
+
+        //Output um sich die Werte anzusehen, auf die die Plathalter verweisen
         /*
         System.out.println("rndm werte fuer AGG");
         for (int i = 0; i < rndmWeteAGG.size(); i++) {
             System.out.println(rndmWeteAGG.get(i).toString());
         }
-         */
+        */
 
     }
 

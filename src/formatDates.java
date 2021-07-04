@@ -30,12 +30,21 @@ public class formatDates {
             //neues Array erstellen
             double[] werte = new double[platz.length];
             //gewicht in double umwandeln, komma durch Punkt ersetzen und aufrunden
-            werte[0] = BigDecimal.valueOf(Double.parseDouble(dates.get(i)[0].replace(",", "."))).setScale(2, RoundingMode.HALF_UP).doubleValue();
-            werte[1] = -2;
-            for (int j = 2; j <dates.get(2).length; j++) {
-                //bewertungen in double umwandeln, komma durch Punkt ersetzen und aufrunden
-                werte[j] = BigDecimal.valueOf(Double.parseDouble(dates.get(i)[j].replace(",", "."))).setScale(2, RoundingMode.HALF_UP).doubleValue();
+            if(!dates.get(i)[0].isEmpty()) {
+                werte[0] = BigDecimal.valueOf(Double.parseDouble(dates.get(i)[0].replace(",", "."))).setScale(2, RoundingMode.HALF_UP).doubleValue();
+            }else{
+                werte[0] = 42.42;
             }
+                werte[1] = -2;
+                for (int j = 2; j < dates.get(2).length; j++) {
+                    //bewertungen in double umwandeln, komma durch Punkt ersetzen und aufrunden
+                    if(!dates.get(i)[j].isEmpty()) {
+                        werte[j] = BigDecimal.valueOf(Double.parseDouble(dates.get(i)[j].replace(",", "."))).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                    }else{
+                        werte[j] = 42.42;
+                    }
+                }
+
             ret.add(werte);
         }
 
@@ -51,7 +60,7 @@ public class formatDates {
     public boolean gewichtungenPruefen(){
         boolean gewichtung = false;
         for (int i = 0; i <ret.size() ; i++) {
-            if(ret.get(i)[0] < 0 || ret.get(i)[0] > 1){
+            if(ret.get(i)[0] < 0 || ret.get(i)[0] > 1 && ret.get(i)[0] != 42.42) {
                 gewichtung = true;
                 break;
             }
@@ -63,7 +72,7 @@ public class formatDates {
         boolean bewertung = false;
         for (int i = 0; i <ret.size() ; i++) {
             for (int j = 2; j <ret.get(i).length ; j++) {
-                if(ret.get(i)[j] < 0 || ret.get(i)[j] > 1){
+                if((ret.get(i)[j] < 0 || ret.get(i)[j] > 1)&&ret.get(i)[j] != 42.42){
                     if(ret.get(i)[1] == -2) {
                         bewertung = true;
                         break;

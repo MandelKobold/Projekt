@@ -20,7 +20,9 @@ public class NWA {
         for (int i = 0; i<dates.size(); i++) {
             double[] multiplied = new double[dates.get(2).length-2];
             for (int j = 2; j <dates.get(2).length; j++) {
-                multiplied[j-2] = dates.get(i)[0]*dates.get(i)[j];
+                if(dates.get(i)[j] != 42.42) {
+                    multiplied[j - 2] = dates.get(i)[0] * dates.get(i)[j];
+                }
             }
             multnwa.add(multiplied);
         }
@@ -39,7 +41,9 @@ public class NWA {
         result = new ArrayList<>();
         for (int i = 0; i < multnwa.get(0).length; i++) {
             for (int j = 0; j <multnwa.size() ; j++) {
-                singelSum += multnwa.get(j)[i];
+                if(multnwa.get(j)[i] != 42.42){
+                    singelSum += multnwa.get(j)[i];
+                }
             }
             //Daten Formatieren
             singelSum *=100;
@@ -66,7 +70,7 @@ public class NWA {
         //neue AGG durchgehen und einen passenden Zufallswert inserten
         for (int i = 0; i < newAGG.size(); i++) {
             for (int j = 0; j <newAGG.get(i).length ; j++) {
-                if(newAGG.get(i)[j] > 1){
+                if(newAGG.get(i)[j] > 1 && newAGG.get(i)[j] != 42.42){
                     int index = (int) newAGG.get(i)[j];
                     //index des random Werts aussuchen
                     int chooseRndmWert = (int) (Math.random()*10)%rndmWeteAGG.get(index).size();
@@ -74,6 +78,7 @@ public class NWA {
                 }
             }
         }
+        //Output der Matrix mit den eingesetzten Zufallzahlen
         /*
         System.out.println("READY FOR SOME NWA ACTION");
         for (int i = 0; i < AGG.size(); i++) {

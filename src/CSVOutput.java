@@ -54,7 +54,7 @@ public class CSVOutput {
             boolean ausgeschlossen = false;
             for (int i = 0; i <gewichtungPlatzierung.length ; i++) {
                 //Ausschlusskriterium: heaelfte der Replikationen multipliziert mit dem hoechsten Platz
-                if(gewichtungPlatzierung[i] > 5000*ram.length+1) {
+                if(gewichtungPlatzierung[i] > 5000*ram.length+1 || gewichtungPlatzierung[i] < 10000) {
                     ausschluss.add(i+1);
                     ausgeschlossen = true;
                 }else{
@@ -62,9 +62,11 @@ public class CSVOutput {
                 }
             }
             if(ausgeschlossen && ausschluss.size() != ram.length) {
+                datalines.add(new String[]{""});
                 datalines.add(new String[]{"Die Alternativen " + akzeptiert.toString() + " werden akzeptiert." });
                 datalines.add(new String[]{"Die Alternativen " + ausschluss.toString() + " werden nicht akzeptiert"});
             }else{
+                datalines.add(new String[]{""});
                 datalines.add(new String[]{"Es konnte keine Alternative ausgeschlossen werden."});
             }
             try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
