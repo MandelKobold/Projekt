@@ -27,12 +27,12 @@ public class NWA {
             multnwa.add(multiplied);
         }
 
-        /*
+/*
         System.out.println("NWA multipliziert");
         for (int j = 0; j <multnwa.size() ; j++) {
             System.out.println(Arrays.toString(multnwa.get(j)));
         }
-         */
+*/
         nutzwertAdd(multnwa);
 
     }
@@ -45,9 +45,12 @@ public class NWA {
                     singelSum += multnwa.get(j)[i];
                 }
             }
-            //Daten Formatieren
+            //Daten Formatieren (Manuelles runden :[)
             singelSum *=100;
             int caster = (int) singelSum;
+            if(singelSum - caster > 0.5){
+                caster+=1;
+            }
             singelSum = caster;
             singelSum /=100;
             //Summen zur Ergebnisliste adden
@@ -79,14 +82,18 @@ public class NWA {
             }
         }
         //Output der Matrix mit den eingesetzten Zufallzahlen
-        /*
+/*
         System.out.println("READY FOR SOME NWA ACTION");
         for (int i = 0; i < AGG.size(); i++) {
             System.out.println(Arrays.toString(AGG.get(i)));
         }
-        */
+*/
         this.dates = newAGG;
 
+    }
+
+    public ArrayList<double[]> getDates() {
+        return dates;
     }
 
     public ArrayList<Double> getResult() {
