@@ -11,9 +11,101 @@ public class Tests {
         Assert.assertEquals(0,0);
     }
 
+    //formatDates tests
+    @Test
+    public void FormatDateTest(){
+        ArrayList<double[]> checking = new ArrayList<>();
+
+        //Erstellen von Daten, mit denen abgeglichen werden soll (Scenario 1)
+        double[] e1 = new double[]{0.1,-2,0.5,0.5,0.5,0.5,0.5,0.7,0.5,0.7};
+        double[] e2 = new double[]{0.2,-2,0.2,0.2,0.2,0.2,0.2,0.1,0.2,0.2};
+        double[] e3 = new double[]{0.3,-2,0.3,0.3,0.3,0.3,0.3,0.1,0.3,0.3};
+        double[] e4 = new double[]{0.4,-2,0.4,0.4,0.4,0.4,0.4,0.1,0.4,0.4};
+        double[] e5 = new double[]{0.5,-2,0.5,0.5,0.5,0.1,0.1,0.7,0.5,0.1};
+        double[] e6 = new double[]{1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        double[] e7 = new double[]{0.1,-2,0.5,0.5,0.5,0.5,0.5,0.7,0.5,0.7};
+        double[] e8 = new double[]{0.2,-2,0.2,0.2,0.2,0.2,0.2,0.1,0.2,0.2};
+        double[] e9 = new double[]{0.3,-2,0.3,0.3,0.3,0.3,0.3,0.1,0.3,0.3};
+        double[] e10= new double[]{0.4,-2,0.4,0.4,0.4,0.4,0.4,0.1,0.4,0.4};
+        double[] e111= new double[]{0.5,-2,0.5,0.5,0.5,0.1,0.1,0.7,0.5,0.1};
+        double[] e121= new double[]{1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        double[] e13= new double[]{0.1,-2,0.5,0.5,0.5,0.5,0.5,0.7,0.5,0.7};
+        double[] e14 = new double[]{0.2,-2,0.2,0.2,0.2,0.2,0.2,0.1,0.2,0.2};
+        double[] e15 = new double[]{0.3,-2,0.3,0.3,0.3,0.3,0.3,0.1,0.3,0.3};
+        double[] e16 = new double[]{0.4,-2,0.4,0.4,0.4,0.4,0.4,0.1,0.4,0.4};
+        double[] e17 = new double[]{0.5,-2,0.5,0.5,0.5,0.1,0.1,0.7,0.5,0.1};
+        double[] e18 = new double[]{1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        double[] e19 = new double[]{0.5,-2,0.5,0.5,0.5,0.5,0.5,0.7,0.5,0.1};
+        double[] e20 = new double[]{0.4,-2,0.2,0.2,0.2,0.2,0.2,0.1,0.2,0.2};
+        double[] e211 = new double[]{0.3,-2,0.3,0.3,0.3,0.3,0.3,0.1,0.3,0.3};
+        double[] e221 = new double[]{0.2,-2,0.4,0.4,0.1,0.4,0.1,0.1,0.1,0.4};
+        double[] e23 = new double[]{0.1,-2,0.5,0.5,0.5,0.1,0.1,0.7,0.5,0.1};
+        double[] e24= new double[]{1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        double[] e25 = new double[]{0.5,-2,0.5,0.5,0.1,0.5,0.1,0.7,0.5,0.7};
+        double[] e26 = new double[]{0.4,-2,0.2,0.2,0.2,0.2,0.2,0.1,0.2,0.2};
+        double[] e27 = new double[]{0.3,-2,0.3,0.3,0.3,0.3,0.3,0.1,0.3,0.3};
+        double[] e28 = new double[]{0.2,-2,0.1,0.4,0.1,0.4,0.4,0.1,0.4,0.1};
+        double[] e29 = new double[]{0.1,-2,0.5,0.5,0.5,0.1,0.1,0.7,0.5,0.1};
+        double[] e30 = new double[]{1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+        double[] e311 = new double[]{0.5,-2,0.5,0.5,0.7,0.7,0.5,0.7,0.5,0.7};
+        double[] e321 = new double[]{0.4,-2,0.2,0.2,0.2,0.2,0.2,0.1,0.2,0.2};
+        double[] e33= new double[]{0.3,-2,0.3,0.3,0.3,0.3,0.3,0.1,0.3,0.3};
+        double[] e34 = new double[]{0.2,-2,0.4,0.4,0.4,0.4,0.4,0.1,0.4,0.4};
+        double[] e35 = new double[]{0.1,-2,0.5,0.1,0.1,0.1,0.1,0.7,0.5,0.1};
+
+        checking.add(e1);
+        checking.add(e2);
+        checking.add(e3);
+        checking.add(e4);
+        checking.add(e5);
+        checking.add(e6);
+        checking.add(e7);
+        checking.add(e8);
+        checking.add(e9);
+        checking.add(e10);
+        checking.add(e111);
+        checking.add(e121);
+        checking.add(e13);
+        checking.add(e14);
+        checking.add(e15);
+        checking.add(e16);
+        checking.add(e17);
+        checking.add(e18);
+        checking.add(e19);
+        checking.add(e20);
+        checking.add(e211);
+        checking.add(e221);
+        checking.add(e23);
+        checking.add(e24);
+        checking.add(e25);
+        checking.add(e26);
+        checking.add(e27);
+        checking.add(e28);
+        checking.add(e29);
+        checking.add(e30);
+        checking.add(e311);
+        checking.add(e321);
+        checking.add(e33);
+        checking.add(e34);
+        checking.add(e35);
+
+        //Testen mithilfe der automatischen CSV funktion (ließt scenario 1 aus)
+        CSVinput test = new CSVinput();
+        test.read();
+        formatDates umwandler = new formatDates();
+        umwandler.format(test.getDates());
+
+
+        //Vergleich
+        for (int i = 0; i <umwandler.ret.size() ; i++) {
+            for (int j = 0; j <umwandler.ret.get(i).length ; j++) {
+                Assert.assertEquals(checking.get(i)[j], umwandler.getRet().get(i)[j]);
+            }
+        }
+    }
+
 
     //NWA tests
-
     @Test
     public void NWATestOhnerndmWerte(){
         NWA nwa = new NWA();
@@ -177,7 +269,49 @@ public class Tests {
         CMAA cmaa = new CMAA(dates);
 
     }
-    //formatDates tests
+
 
     //rankacceptabilitymatrix tests
+    @Test
+    public void RankAcceptabilityMatrixTest(){
+
+        ArrayList<Double> testdata = new ArrayList<>();
+
+        //füllen eines Arrays zum Vergleich
+        int[][] accTest = new int[7][7];
+        for (int i = 0; i <7 ; i++) {
+            for (int j = 0; j < 7; j++) {
+                accTest[i][j] = 0;
+            }
+        }
+        accTest[4][0]=1;
+        accTest[2][1]=1;
+        accTest[3][2]=1;
+        accTest[0][3]=1;
+        accTest[6][4]=1;
+        accTest[1][5]=1;
+        accTest[5][6]=1;
+
+
+        //Übergabe fake-Daten (normalerweise aus NWA)
+        testdata.add(1.08);
+        testdata.add(0.91);
+        testdata.add(1.19);
+        testdata.add(1.18);
+        testdata.add(1.28);
+        testdata.add(0.81);
+        testdata.add(0.94);
+
+        //Ranking erstellen
+        rankacceptabilitymatrix raa = new rankacceptabilitymatrix(testdata);
+        raa.ranking();
+
+        //Vergleich
+        for (int i = 0; i < raa.getRankAcceptability().length ; i++) {
+            for (int j = 0; j <raa.getRankAcceptability()[0].length ; j++) {
+                Assert.assertEquals(raa.getRankAcceptability()[i][j], accTest[i][j]);
+            }
+        }
+
+    }
 }
