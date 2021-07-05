@@ -2,6 +2,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.zip.DeflaterOutputStream;
 
 public class Tests {
@@ -220,14 +221,14 @@ public class Tests {
     @Test
     public void CMAATest2gleicheDMs(){
         ArrayList<double[]> dates = new ArrayList<>();
-
+        ArrayList<double[]> tdates = new ArrayList<>();
         double[] e11 = new double[]{0.1,-2.0,0.5,0.4,0.5,0.5,0.3,0.5,0.7};
         double[] e21 = new double[]{0.3,-2.0,0.3,0.5,0.5,0.6,0.7,0.3,0.2};
         double[] e31 = new double[]{0.8,-2.0,0.5,0.3,0.3,0.4,0.6,0.5,0.6};
         double[] e41 = new double[]{0.2,-2.0,0.8,0.5,0.5,0.9,0.7,0.5,0.7};
         double[] e51 = new double[]{0.7,-2.0,0.4,0.4,0.7,0.5,0.4,0.1,0.1};
         double[] e61 = new double[]{0.2,-2.0,0.5,0.5,0.8,0.5,0.7,0.5,0.6};
-        double[] splitter = new double[]{-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1};
+        double[] splitter = new double[]{-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0};
         dates.add(e11);
         dates.add(e21);
         dates.add(e31);
@@ -242,31 +243,139 @@ public class Tests {
         dates.add(e51);
         dates.add(e61);
         ArrayList<ArrayList<double[]>> gesplittet = new ArrayList<>();
-
+        tdates.add(e11);
+        tdates.add(e21);
+        tdates.add(e31);
+        tdates.add(e41);
+        tdates.add(e51);
+        tdates.add(e61);
+        gesplittet.add(tdates);
+        gesplittet.add(tdates);
         CMAA cmaa = new CMAA(dates);
+        cmaa.compare();
 
+        for (int i = 0; i < gesplittet.size(); i++) {
+            for (int j = 0; j <gesplittet.get(i).size() ; j++) {
+                Assert.assertEquals(gesplittet.get(i).get(j), cmaa.split().get(i).get(j));
+            }
+        }
+        for (int i = 0; i < tdates.size(); i++) {
+            for (int j = 0; j <tdates.get(i).length ; j++) {
+                Assert.assertEquals(tdates.get(i)[j],cmaa.getAGG().get(i)[j]);
+            }
+        }
+        ArrayList<ArrayList<Double>> rndmWeteAGG = new ArrayList<>();
+        ArrayList<Double> f = new ArrayList<>(); //filler to begin ArrayList with index 2
+        rndmWeteAGG.add(f);
+        rndmWeteAGG.add(f);
+
+        for (int i = 0; i <rndmWeteAGG.size() ; i++) {
+            Assert.assertEquals(rndmWeteAGG,cmaa.getRndmWeteAGG());
+        }
 
     }
     @Test
     public void CMAATest2verschDMs(){
         ArrayList<double[]> dates = new ArrayList<>();
-
+        ArrayList<double[]> tdates1 = new ArrayList<>();
+        ArrayList<double[]> tdates2 = new ArrayList<>();
+        ArrayList<double[]> AGGTest = new ArrayList<>();
         double[] e11 = new double[]{0.1,-2.0,0.5,0.4,0.5,0.5,0.3,0.5,0.7};
         double[] e21 = new double[]{0.3,-2.0,0.3,0.5,0.5,0.6,0.7,0.3,0.2};
         double[] e31 = new double[]{0.8,-2.0,0.5,0.3,0.3,0.4,0.6,0.5,0.6};
         double[] e41 = new double[]{0.2,-2.0,0.8,0.5,0.5,0.9,0.7,0.5,0.7};
         double[] e51 = new double[]{0.7,-2.0,0.4,0.4,0.7,0.5,0.4,0.1,0.1};
         double[] e61 = new double[]{0.2,-2.0,0.5,0.5,0.8,0.5,0.7,0.5,0.6};
-        double[] splitter = new double[]{-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1,-0.1};
-        double[] e12 = new double[]{0.1,-2.0,0.5,0.4,0.5,0.5,0.3,0.5,0.7};
-        double[] e22 = new double[]{0.3,-2.0,0.3,0.5,0.5,0.6,0.7,0.3,0.2};
+        double[] splitter = new double[]{-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0,-1.0};
+        double[] e12 = new double[]{0.1,-2.0,0.6,0.4,0.5,0.5,0.3,0.5,0.7};
+        double[] e22 = new double[]{0.3,-2.0,0.3,0.6,0.5,0.6,0.7,0.3,0.2};
         double[] e32 = new double[]{0.8,-2.0,0.5,0.3,0.3,0.4,0.6,0.5,0.6};
-        double[] e42 = new double[]{0.2,-2.0,0.8,0.5,0.5,0.9,0.7,0.5,0.7};
-        double[] e52 = new double[]{0.7,-2.0,0.4,0.4,0.7,0.5,0.4,0.1,0.1};
-        double[] e62 = new double[]{0.2,-2.0,0.5,0.5,0.8,0.5,0.7,0.5,0.6};
+        double[] e42 = new double[]{0.2,-2.0,0.2,0.5,0.5,0.9,0.7,0.5,0.7};
+        double[] e52 = new double[]{0.7,-2.0,0.4,0.4,0.7,0.5,0.2,0.1,0.1};
+        double[] e62 = new double[]{0.2,-2.0,0.1,0.2,0.8,0.5,0.7,0.5,0.6};
         dates.add(e11);
+        dates.add(e21);
+        dates.add(e31);
+        dates.add(e41);
+        dates.add(e51);
+        dates.add(e61);
+        dates.add(splitter);
+        dates.add(e12);
+        dates.add(e22);
+        dates.add(e32);
+        dates.add(e42);
+        dates.add(e52);
+        dates.add(e62);
+        ArrayList<ArrayList<double[]>> gesplittet = new ArrayList<>();
+        tdates1.add(e11);
+        tdates1.add(e21);
+        tdates1.add(e31);
+        tdates1.add(e41);
+        tdates1.add(e51);
+        tdates1.add(e61);
+        gesplittet.add(tdates1);
+        tdates2.add(e12);
+        tdates2.add(e22);
+        tdates2.add(e32);
+        tdates2.add(e42);
+        tdates2.add(e52);
+        tdates2.add(e62);
+        gesplittet.add(tdates2);
+
+        AGGTest.add(new double[]{0.1,-2.0,2,0.4,0.5,0.5,0.3,0.5,0.7});      // {0.1,-2.0,0.5,0.4,0.5,0.5,0.3,0.5,0.7}  {0.1,-2.0,0.6,0.4,0.5,0.5,0.3,0.5,0.7}
+        AGGTest.add(new double[]{0.3,-2.0,0.3,3,0.5,0.6,0.7,0.3,0.2});      // {0.3,-2.0,0.3,0.5,0.5,0.6,0.7,0.3,0.2}  {0.3,-2.0,0.3,0.6,0.5,0.6,0.7,0.3,0.2}
+        AGGTest.add(new double[]{0.8,-2.0,0.5,0.3,0.3,0.4,0.6,0.5,0.6});    // {0.8,-2.0,0.5,0.3,0.3,0.4,0.6,0.5,0.6}  {0.8,-2.0,0.5,0.3,0.3,0.4,0.6,0.5,0.6}
+        AGGTest.add(new double[]{0.2,-2.0,4,0.5,0.5,0.9,0.7,0.5,0.7});      // {0.2,-2.0,0.8,0.5,0.5,0.9,0.7,0.5,0.7}  {0.2,-2.0,0.2,0.5,0.5,0.9,0.7,0.5,0.7}
+        AGGTest.add(new double[]{0.7,-2.0,0.4,0.4,0.7,0.5,5,0.1,0.1});      // {0.7,-2.0,0.4,0.4,0.7,0.5,0.4,0.1,0.1}  {0.7,-2.0,0.4,0.4,0.7,0.5,0.2,0.1,0.1}
+        AGGTest.add(new double[]{0.2,-2.0,6,7,0.8,0.5,0.7,0.5,0.6});        // {0.2,-2.0,0.5,0.5,0.8,0.5,0.7,0.5,0.6}  {0.2,-2.0,0.1,0.2,0.8,0.5,0.7,0.5,0.6}
 
         CMAA cmaa = new CMAA(dates);
+        cmaa.compare();
+
+        for (int i = 0; i < gesplittet.size(); i++) {
+            for (int j = 0; j <gesplittet.get(i).size() ; j++) {
+                Assert.assertEquals(gesplittet.get(i).get(j), cmaa.split().get(i).get(j));
+            }
+        }
+
+        for (int i = 0; i < AGGTest.size(); i++) {
+            for (int j = 0; j <AGGTest.get(i).length ; j++) {
+                Assert.assertEquals(AGGTest.get(i)[j],cmaa.getAGG().get(i)[j]);
+            }
+        }
+
+        ArrayList<ArrayList<Double>> rndmWeteAGG = new ArrayList<>();
+        ArrayList<Double> f = new ArrayList<>(); //filler to begin ArrayList with index 2
+        rndmWeteAGG.add(f);
+        rndmWeteAGG.add(f);
+        ArrayList<Double> rndm2 = new ArrayList<>();
+        rndm2.add(0.5);
+        rndm2.add(0.6);
+        ArrayList<Double> rndm3 = new ArrayList<>();
+        rndm3.add(0.5);
+        rndm3.add(0.6);
+        ArrayList<Double> rndm4 = new ArrayList<>();
+        rndm4.add(0.8);
+        rndm4.add(0.2);
+        ArrayList<Double> rndm5 = new ArrayList<>();
+        rndm5.add(0.4);
+        rndm5.add(0.2);
+        ArrayList<Double> rndm6 = new ArrayList<>();
+        rndm6.add(0.5);
+        rndm6.add(0.1);
+        ArrayList<Double> rndm7 = new ArrayList<>();
+        rndm7.add(0.5);
+        rndm7.add(0.2);
+        rndmWeteAGG.add(rndm2);
+        rndmWeteAGG.add(rndm3);
+        rndmWeteAGG.add(rndm4);
+        rndmWeteAGG.add(rndm5);
+        rndmWeteAGG.add(rndm6);
+        rndmWeteAGG.add(rndm7);
+
+        for (int i = 0; i <rndmWeteAGG.size() ; i++) {
+            Assert.assertEquals(rndmWeteAGG,cmaa.getRndmWeteAGG());
+        }
 
     }
 

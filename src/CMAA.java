@@ -32,7 +32,7 @@ public class CMAA {
 
         }
         //Output um sich anzusehen, wie die getrennten DMs aussehen
-        /*
+/*
         System.out.println("SPLIT");
         for (int i = 0; i <listeMitDMMatritzen.size() ; i++) {
             System.out.println("Herbert dies ist eine Arrayliste");
@@ -40,7 +40,7 @@ public class CMAA {
                 System.out.println(Arrays.toString(listeMitDMMatritzen.get(i).get(j)));
             }
         }
-        */
+*/
         return listeMitDMMatritzen;
     }
 
