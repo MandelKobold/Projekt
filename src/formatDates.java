@@ -48,13 +48,16 @@ public class formatDates {
             ret.add(werte);
         }
         //Output der Matrix in der nur noch Double drin stehen
+
         /*
         System.out.println("Herbert diese Werte sind formatiert");
         for (int k = 0; k < ret.size(); k++) {
 
             System.out.println(Arrays.toString(ret.get(k)));
         }
-        */
+
+         */
+
     }
 
     public boolean gewichtungenPruefen(){
@@ -62,6 +65,7 @@ public class formatDates {
         for (int i = 0; i <ret.size() ; i++) {
             if(ret.get(i)[0] < 0 || ret.get(i)[0] > 1 && ret.get(i)[0] != 42.42) {
                 gewichtung = true;
+                System.err.println(i);
                 break;
             }
         }

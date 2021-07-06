@@ -50,7 +50,7 @@ public class TXTinput {
 
                         if(leerzeichenArray[m] >= '0'&& leerzeichenArray[m] <= '9'||leerzeichenArray[m] == ','||leerzeichenArray[m] == 'D'||leerzeichenArray[m] == 'G'||leerzeichenArray[m] == 'c'||leerzeichenArray[m] == 'a'){
                             leerzeichenloserString += leerzeichenArray[m];
-                            System.out.println(leerzeichenArray[m]);
+                            //System.out.println(leerzeichenArray[m]);
                         }
                     }
                     //System.out.println(leerzeichenloserString);
@@ -62,7 +62,7 @@ public class TXTinput {
 
 
             for (int j = 0; j <dates.size(); j++){
-                System.out.println(Arrays.toString(dates.get(j)));
+                //System.out.println(Arrays.toString(dates.get(j)));
             }
 
 

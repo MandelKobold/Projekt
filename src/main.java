@@ -38,7 +38,6 @@ public class main {
                 CMAA cmaa = new CMAA(form.getRet());
                 cmaa.compare();
                 //NWA aufrufen mit zufälligen Werten aus der AGG
-
                 NWA nwa = new NWA();
                 nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
                 nwa.nutzwertMultiply();
@@ -68,10 +67,10 @@ public class main {
                 w.read();
                 formatDates form = new formatDates();
                 form.format(w.getDates());
-            if(!form.gewichtungenPruefen()){
+            if(form.gewichtungenPruefen()){
                 ErrorMessage er = new ErrorMessage(true, "Bitte die Gewichtungen Prüfen");
                 er.setVisible(true);
-            }else if(!form.bewertungenPruefen()){
+            }else if(form.bewertungenPruefen()){
                 ErrorMessage er = new ErrorMessage(true, "Bitte die Bewertungen Prüfen");
                 er.setVisible(true);
             }else {
@@ -96,11 +95,11 @@ public class main {
                     ram = new rankacceptabilitymatrix(nwa.getResult(), rankAcceptability);
                     ram.ranking();
                     //System.out.println(nwa.getResult().toString());
-                    CSVOutput ret = new CSVOutput();
-                    ret.OutputCSV(ram.getRankAcceptability());
                 }
                 System.out.println("Rank Acceptability Matrix:");
                 System.out.println(Arrays.deepToString(ram.getRankAcceptability()));
+                CSVOutput ret = new CSVOutput();
+                ret.OutputCSV(ram.getRankAcceptability());
             }
 
         }else if(!f.getCancel()){

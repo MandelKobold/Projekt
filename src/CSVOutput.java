@@ -21,9 +21,8 @@ public class CSVOutput {
         ArrayList<String[]> datalines = createFile(ram);
 
         // Dialog zum Speichern von Dateien anzeigen
-        System.out.println("Herbert" + rueckgabeWert);
         rueckgabeWert = chooser.showSaveDialog(null);
-        System.out.println(rueckgabeWert);
+
         if (rueckgabeWert == JFileChooser.APPROVE_OPTION) {
             String path = chooser.getSelectedFile().getAbsolutePath();
             File csvOutputFile;
@@ -43,6 +42,8 @@ public class CSVOutput {
                 e.printStackTrace();
             }
 
+        }else if(rueckgabeWert == JFileChooser.CANCEL_OPTION){
+            System.exit(0);
         }
     }
 
