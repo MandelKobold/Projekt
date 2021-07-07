@@ -62,7 +62,7 @@ public class TXTinput {
 
 
             for (int j = 0; j <dates.size(); j++){
-                //System.out.println(Arrays.toString(dates.get(j)));
+                System.out.println(Arrays.toString(dates.get(j)));
             }
 
 
