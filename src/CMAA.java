@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CMAA {
+class CMAA {
 
     ArrayList<double[]> dates;
     ArrayList<double[]> AGG;
     ArrayList<ArrayList<Double>> rndmWeteAGG;
 
-    public CMAA(ArrayList<double[]> dates) {
+    CMAA(ArrayList<double[]> dates) {
         this.dates = dates;
     }
 
@@ -119,11 +119,11 @@ public class CMAA {
 
     }
 
-    public ArrayList<ArrayList<Double>> getRndmWeteAGG() {
+    ArrayList<ArrayList<Double>> getRndmWeteAGG() {
         return rndmWeteAGG;
     }
 
-    public ArrayList<double[]> getAGG() {
+    ArrayList<double[]> getAGG() {
         return AGG;
     }
 }

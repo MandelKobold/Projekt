@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class CSVOutput {
+class CSVOutput {
     //Die Daten sinvoll ausgeben
 
     private int rueckgabeWert;
 
-    public void OutputCSVNORMAL(int[][]ram) throws IOException {
+    void OutputCSVNORMAL(int[][] ram) throws IOException {
         int[] gewichtungPlatzierung = gewichtungPlatzierung(ram);
         System.out.println(Arrays.toString(gewichtungPlatzierung));
         JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -109,7 +109,7 @@ public class CSVOutput {
         return datalines;
     }
 
-    public void OutputCSVMAC(int[][]ram) throws IOException {
+    void OutputCSVMAC(int[][] ram) throws IOException {
         int[] gewichtungPlatzierung = gewichtungPlatzierung(ram);
         System.out.println(Arrays.toString(gewichtungPlatzierung));
         FileDialog chooser = new FileDialog(new JFrame(), "", FileDialog.SAVE);
