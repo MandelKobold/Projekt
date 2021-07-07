@@ -1,19 +1,15 @@
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.SocketHandler;
 
 
-public class NWA {
+class NWA {
 
     ArrayList<double[]> dates;
     ArrayList<Double> result;
-    public NWA() {}
+    NWA() {}
 
     //hier nutzwertanalyse bitte
-    public void nutzwertMultiply(){
+    void nutzwertMultiply(){
         ArrayList<double[]> multnwa = new ArrayList<>();
         //alle Gewichte mit Bewertungen multiplizieren
 
@@ -36,7 +32,7 @@ public class NWA {
         nutzwertAdd(multnwa);
 
     }
-    void nutzwertAdd(ArrayList<double[]> multnwa){
+    private void nutzwertAdd(ArrayList<double[]> multnwa){
         double singelSum = 0.0;
         result = new ArrayList<>();
         for (int i = 0; i < multnwa.get(0).length; i++) {
@@ -63,7 +59,7 @@ public class NWA {
          */
     }
 
-    public void prepareNWA(ArrayList<double[]> AGG, ArrayList<ArrayList<Double>> rndmWeteAGG){
+    void prepareNWA(ArrayList<double[]> AGG, ArrayList<ArrayList<Double>> rndmWeteAGG){
         // um die alte AGG zu behalten brauchen wir ein deep copy
         ArrayList<double[]> newAGG = new ArrayList<>();
         for (int i = 0; i <AGG.size() ; i++) {
@@ -92,11 +88,11 @@ public class NWA {
 
     }
 
-    public ArrayList<double[]> getDates() {
+    ArrayList<double[]> getDates() {
         return dates;
     }
 
-    public ArrayList<Double> getResult() {
+    ArrayList<Double> getResult() {
         return result;
     }
 }

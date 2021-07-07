@@ -1,17 +1,16 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class rankacceptabilitymatrix {
+class rankacceptabilitymatrix {
 
     Double[] dataForRanking;
     int[][] rankAcceptability;
 
-    public rankacceptabilitymatrix(ArrayList<Double> result, int[][] rankAcceptability) {
+    rankacceptabilitymatrix(ArrayList<Double> result, int[][] rankAcceptability) {
         dataForRanking = result.toArray(new Double[result.size()]);
         this.rankAcceptability = rankAcceptability;
     }
 
-    public rankacceptabilitymatrix(ArrayList<Double> result) {
+    rankacceptabilitymatrix(ArrayList<Double> result) {
         dataForRanking = result.toArray(new Double[result.size()]);
         rankAcceptability = new int[dataForRanking.length][dataForRanking.length];
         for (int i = 0; i < rankAcceptability.length; i++) {
@@ -19,6 +18,10 @@ public class rankacceptabilitymatrix {
                 rankAcceptability[i][j] = 0;
             }
         }
+    }
+
+    rankacceptabilitymatrix() {
+
     }
 
     //Die Daten, aus der NWA aufarbeiten
@@ -66,7 +69,7 @@ public class rankacceptabilitymatrix {
         return index;
     }
 
-    public int[][] getRankAcceptability() {
+    int[][] getRankAcceptability() {
         return rankAcceptability;
     }
 }

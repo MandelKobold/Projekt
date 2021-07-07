@@ -3,25 +3,24 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
-public class CSVinput {
+class CSVinput {
 
-    String csvFile;
-    BufferedReader br = null;
-    String line = "";
-    String cvsSplitBy = ";";
+    private String csvFile;
+    private BufferedReader br = null;
+    private String line = "";
+    private String cvsSplitBy = ";";
     private ArrayList<String[]> dates = new ArrayList<>();
 
-    public CSVinput() {
+    CSVinput() {
         //this.csvFile = "D:\\UniVideos\\Semester_4\\Programmierparadigmen\\Übungen\\Programmieraufgaben\\Scala\\Woche_7\\SoftwareProjekt\\Daten\\scenario_1.csv";
         //this.csvFile = "G:\\Studium\\Semester4\\Softwareprojekt\\Projekt\\Daten\\scenario_1.csv";
     }
-    public CSVinput(String path) {
+    CSVinput(String path) {
         this.csvFile = path;
     }
-    public void read(){
+    void read(){
         try {
 
             br = new BufferedReader(new FileReader(csvFile));
@@ -42,10 +41,10 @@ public class CSVinput {
 
             }
 
-            /*System.out.println("CSV Input");
+            System.out.println("CSV Input");
             for (int j = 0; j <dates.size(); j++){
                 System.out.println(Arrays.toString(dates.get(j)));
-            }*/
+            }
 
 
         } catch (FileNotFoundException e) {
@@ -79,7 +78,7 @@ public class CSVinput {
         return true;
     }
 
-    public ArrayList<String[]> getDates() {
+    ArrayList<String[]> getDates() {
         return dates;
     }
 }

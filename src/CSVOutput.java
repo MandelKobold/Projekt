@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,13 +11,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class CSVOutput {
+class CSVOutput {
     //Die Daten sinvoll ausgeben
 
     private int rueckgabeWert;
-    private JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
-    public void OutputCSV(int[][]ram) throws IOException {
+    void OutputCSVNORMAL(int[][] ram) throws IOException {
+
+        JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
         ArrayList<String[]> datalines = createFile(ram);
 
@@ -46,6 +48,47 @@ public class CSVOutput {
             System.exit(0);
         }
     }
+
+
+
+    void OutputCSVMAC(int[][] ram) throws IOException {
+
+        FileDialog chooser = new FileDialog(new JFrame(), "", FileDialog.SAVE);
+
+        ArrayList<String[]> datalines = createFile(ram);
+
+        // Dialog zum Speichern von Dateien anzeigen
+        chooser.setVisible(true);
+        String rueckgabeWertMAC = chooser.getDirectory() + chooser.getName();
+
+
+        if (rueckgabeWertMAC != null) {
+            File csvOutputFile;
+
+            //testen, ob .csv dahinter geschrieben wurde und wenn nicht, das dann dahinter schreiben
+            if (rueckgabeWertMAC.endsWith(".csv")) {
+                csvOutputFile = new File(rueckgabeWertMAC);
+            } else {
+                csvOutputFile = new File(rueckgabeWertMAC + ".csv");
+            }
+
+            try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+                datalines.stream()
+                        .map(this::convertToCSV)
+                        .forEach(pw::println);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 
     private ArrayList<String[]> createFile(int[][]ram){
         int[] gewichtungPlatzierung = gewichtungPlatzierung(ram);
@@ -94,6 +137,7 @@ public class CSVOutput {
         }
         return datalines;
     }
+
     private String convertToCSV(String[] data){
         return Stream.of(data)
                 .map(this::escapeSpecialCharacters)
@@ -117,4 +161,6 @@ public class CSVOutput {
         }
         return gewichtungPlatzierung;
     }
+
+
 }

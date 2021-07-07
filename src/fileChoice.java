@@ -2,7 +2,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-public class fileChoice {
+class fileChoice {
     /*
     User kann Pfad auwaelen
     Endung der Datei betrachten
@@ -15,7 +15,7 @@ public class fileChoice {
     private String end = "";
     private String path;
     boolean cancel = false;
-    public fileChoice()
+    fileChoice()
     {
         chooser.addChoosableFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
         chooser.addChoosableFileFilter(new FileNameExtensionFilter("*.csv", "csv"));
@@ -34,14 +34,14 @@ public class fileChoice {
             cancel = true;
         }
     }
-    public boolean getCancel(){
+    boolean getCancel(){
         return cancel;
     }
-    public String getEnd() {
+    String getEnd() {
         return end;
     }
 
-    public String getPath() {
+    String getPath() {
         return path;
     }
 }
