@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -14,101 +16,156 @@ public class main {
             sonst:
                 Fehlermeldung
      */
+    public static rankacceptabilitymatrix ram = new rankacceptabilitymatrix();
 
-    public static void  main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
+        Boolean isMac = System.getProperty("os.name").contains("Mac");
 
-        fileChoice f = new fileChoice();
+//prüfen ob mac für anderen File chooser
+        if (isMac == false) {
+            fileChoice f = new fileChoice();
 
-        if(f.getEnd().equals("csv")){
-            System.out.println("CSV");
-            //Datei einlesen
-            CSVinput w = new CSVinput(f.getPath());
-            w.read();
-            //Datei zum verarbeiten vorbereiten
-            formatDates form = new formatDates();
-            form.format(w.getDates());
-            if(form.gewichtungenPruefen()){
-                ErrorMessage er = new ErrorMessage(true, "Bitte die Gewichtungen Prüfen");
-                er.setVisible(true);
-            }else if(form.bewertungenPruefen()){
-                ErrorMessage er = new ErrorMessage(true, "Bitte die Bewertungen Prüfen");
-                er.setVisible(true);
-            }else {
-                //AGG erstellen
-                CMAA cmaa = new CMAA(form.getRet());
-                cmaa.compare();
-                //NWA aufrufen mit zufälligen Werten aus der AGG
-                NWA nwa = new NWA();
-                nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
-                nwa.nutzwertMultiply();
-                //zaelen wer akzeptiert wurde
-                rankacceptabilitymatrix ram = new rankacceptabilitymatrix(nwa.getResult());
-                int[][] rankAcceptability = ram.ranking();
-                //System.out.println(nwa.getResult().toString());
+            if (f.getEnd().equals("csv")) {
+                System.out.println("CSV");
+                //Datei einlesen
+                CSVinput w = new CSVinput(f.getPath());
+                w.read();
+                //Datei zum verarbeiten vorbereiten
+                formatDates form = new formatDates();
+                form.format(w.getDates());
+                if (form.gewichtungenPruefen()) {
+                    ErrorMessage er = new ErrorMessage(true, "Bitte die Gewichtungen Prüfen");
+                    er.setVisible(true);
+                } else if (form.bewertungenPruefen()) {
+                    ErrorMessage er = new ErrorMessage(true, "Bitte die Bewertungen Prüfen");
+                    er.setVisible(true);
+                } else {
+                    //AGG erstellen
+                    CMAA cmaa = new CMAA(form.getRet());
+                    //auslagern
+                    createAnalysis(cmaa);
 
-                for (int i = 1; i < 10000; i++) {
-                    nwa = new NWA();
-                    nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
-                    nwa.nutzwertMultiply();
-                    //zaelen wer akzeptiert wurde
-                    ram = new rankacceptabilitymatrix(nwa.getResult(), rankAcceptability);
-                    ram.ranking();
-                    //System.out.println(nwa.getResult().toString());
+
+                    CSVOutput ret = new CSVOutput();
+                    ret.OutputCSVNORMAL(ram.getRankAcceptability());
                 }
-                System.out.println("Rank Acceptability Matrix:");
-                System.out.println(Arrays.deepToString(ram.getRankAcceptability()));
-                CSVOutput ret = new CSVOutput();
-                ret.OutputCSV(ram.getRankAcceptability());
-            }
 
-            }else if(f.getEnd().equals("txt")) {
+            } else if (f.getEnd().equals("txt")) {
                 System.out.println("TXT");
                 TXTinput w = new TXTinput(f.getPath());
                 w.read();
                 formatDates form = new formatDates();
                 form.format(w.getDates());
-            if(form.gewichtungenPruefen()){
-                ErrorMessage er = new ErrorMessage(true, "Bitte die Gewichtungen Prüfen");
-                er.setVisible(true);
-            }else if(form.bewertungenPruefen()){
-                ErrorMessage er = new ErrorMessage(true, "Bitte die Bewertungen Prüfen");
-                er.setVisible(true);
-            }else {
-                //AGG erstellen
-                CMAA cmaa = new CMAA(form.getRet());
-                cmaa.compare();
-                //NWA aufrufen mit zufälligen Werten aus der AGG
-
-                NWA nwa = new NWA();
-                nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
-                nwa.nutzwertMultiply();
-                //zaelen wer akzeptiert wurde
-                rankacceptabilitymatrix ram = new rankacceptabilitymatrix(nwa.getResult());
-                int[][] rankAcceptability = ram.ranking();
-                //System.out.println(nwa.getResult().toString());
-
-                for (int i = 1; i < 10000; i++) {
-                    nwa = new NWA();
-                    nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
-                    nwa.nutzwertMultiply();
-                    //zaelen wer akzeptiert wurde
-                    ram = new rankacceptabilitymatrix(nwa.getResult(), rankAcceptability);
-                    ram.ranking();
+                if (!form.gewichtungenPruefen()) {
+                    ErrorMessage er = new ErrorMessage(true, "Bitte die Gewichtungen Prüfen");
+                    er.setVisible(true);
+                } else if (!form.bewertungenPruefen()) {
+                    ErrorMessage er = new ErrorMessage(true, "Bitte die Bewertungen Prüfen");
+                    er.setVisible(true);
+                } else {
+                    //AGG erstellen
+                    CMAA cmaa = new CMAA(form.getRet());
+                    //auslagern
+                    createAnalysis(cmaa);
                     //System.out.println(nwa.getResult().toString());
+                    CSVOutput ret = new CSVOutput();
+                    ret.OutputCSVNORMAL(ram.getRankAcceptability());
                 }
                 System.out.println("Rank Acceptability Matrix:");
                 System.out.println(Arrays.deepToString(ram.getRankAcceptability()));
-                CSVOutput ret = new CSVOutput();
-                ret.OutputCSV(ram.getRankAcceptability());
+            } else if (!f.getCancel()) {
+                //Wenn Cancel gedrueckt wurde wird das Programm beendet
+                ErrorMessage er = new ErrorMessage(true, "Dieses Dateiformat ist nicht gültig, bitte TXT oder CSV Datei auswählen");
+                er.setVisible(true);
+                System.out.println("HERBERT Dieses Dateiformat ist nicht gültig");
             }
+        }
+        //wir haben einen mac :(
+         else if (isMac == true) {
+             //anderen filechooser verwenden
+            FileDialog fd = new FileDialog(new JFrame(), "", FileDialog.LOAD);
+            fd.setVisible(true);
+            String filename = fd.getDirectory() + fd.getFile();
 
-        }else if(!f.getCancel()){
-            //Wenn Cancel gedrueckt wurde wird das Programm beendet
-            ErrorMessage er = new ErrorMessage(true, "Dieses Dateiformat ist nicht gültig, bitte TXT oder CSV Datei auswählen");
-            er.setVisible(true);
-            System.out.println("HERBERT Dieses Dateiformat ist nicht gültig");
+            if (fd.getType().equals("csv")) {
+                System.out.println("CSV");
+                //Datei einlesen
+                CSVinput w = new CSVinput(filename);
+                w.read();
+                //Datei zum verarbeiten vorbereiten
+                formatDates form = new formatDates();
+                form.format(w.getDates());
+                if (form.gewichtungenPruefen()) {
+                    ErrorMessage er = new ErrorMessage(true, "Bitte die Gewichtungen Prüfen");
+                    er.setVisible(true);
+                } else if (form.bewertungenPruefen()) {
+                    ErrorMessage er = new ErrorMessage(true, "Bitte die Bewertungen Prüfen");
+                    er.setVisible(true);
+                } else {
+                    //AGG erstellen
+                    CMAA cmaa = new CMAA(form.getRet());
+                    //auslagern
+                    createAnalysis(cmaa);
+
+
+                    CSVOutput ret = new CSVOutput();
+                    ret.OutputCSVMAC(ram.getRankAcceptability());
+                }
+            } else if (fd.getType().equals("txt")) {
+                System.out.println("TXT");
+                TXTinput w = new TXTinput(filename);
+                w.read();
+                formatDates form = new formatDates();
+                form.format(w.getDates());
+                if (!form.gewichtungenPruefen()) {
+                    ErrorMessage er = new ErrorMessage(true, "Bitte die Gewichtungen Prüfen");
+                    er.setVisible(true);
+                } else if (!form.bewertungenPruefen()) {
+                    ErrorMessage er = new ErrorMessage(true, "Bitte die Bewertungen Prüfen");
+                    er.setVisible(true);
+                } else {
+                    //AGG erstellen
+                    CMAA cmaa = new CMAA(form.getRet());
+                    createAnalysis(cmaa);
+                    //System.out.println(nwa.getResult().toString());
+                    CSVOutput ret = new CSVOutput();
+                    ret.OutputCSVMAC(ram.getRankAcceptability());
+                }
+                System.out.println("Rank Acceptability Matrix:");
+                System.out.println(Arrays.deepToString(ram.getRankAcceptability()));
+            } else if (filename == null) {
+                //Wenn Cancel gedrueckt wurde wird das Programm beendet
+                ErrorMessage er = new ErrorMessage(true, "Dieses Dateiformat ist nicht gültig, bitte TXT oder CSV Datei auswählen");
+                er.setVisible(true);
+                System.out.println("HERBERT Dieses Dateiformat ist nicht gültig");
+            }
         }
 
+    }
+
+    public static void createAnalysis(CMAA cmaa){
+        cmaa.compare();
+        //NWA aufrufen mit zufälligen Werten aus der AGG
+
+        NWA nwa = new NWA();
+        nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
+        nwa.nutzwertMultiply();
+        //zaelen wer akzeptiert wurde
+        ram = new rankacceptabilitymatrix(nwa.getResult());
+        int[][] rankAcceptability = ram.ranking();
+        //System.out.println(nwa.getResult().toString());
+
+        for (int i = 1; i < 10000; i++) {
+            nwa = new NWA();
+            nwa.prepareNWA(cmaa.getAGG(), cmaa.getRndmWeteAGG());
+            nwa.nutzwertMultiply();
+            //zaelen wer akzeptiert wurde
+            ram = new rankacceptabilitymatrix(nwa.getResult(), rankAcceptability);
+            ram.ranking();
+            //System.out.println(nwa.getResult().toString());
+        }
+        System.out.println("Rank Acceptability Matrix:");
+        System.out.println(Arrays.deepToString(ram.getRankAcceptability()));
     }
 
 
