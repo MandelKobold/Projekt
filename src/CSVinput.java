@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 class CSVinput {
@@ -40,12 +41,12 @@ class CSVinput {
                 }
 
             }
-
+/*
             System.out.println("CSV Input");
             for (int j = 0; j <dates.size(); j++){
                 System.out.println(Arrays.toString(dates.get(j)));
             }
-
+*/
 
         } catch (FileNotFoundException e) {
             ErrorMessage er = new ErrorMessage(false, "Diese Datei konnte nicht gefunden werden");
