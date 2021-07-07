@@ -1,9 +1,8 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class formatDates {
+class formatDates {
 
     ArrayList<double[]> ret = new ArrayList<>();
 
@@ -57,7 +56,7 @@ public class formatDates {
         */
     }
 
-    public boolean gewichtungenPruefen(){
+    boolean gewichtungenPruefen(){
         boolean gewichtung = false;
         for (int i = 0; i <ret.size() ; i++) {
             if(ret.get(i)[0] < 0 || ret.get(i)[0] > 1 && ret.get(i)[0] != 42.42) {
@@ -68,7 +67,7 @@ public class formatDates {
         return gewichtung;
     }
 
-    public boolean bewertungenPruefen(){
+    boolean bewertungenPruefen(){
         boolean bewertung = false;
         for (int i = 0; i <ret.size() ; i++) {
             for (int j = 2; j <ret.get(i).length ; j++) {
@@ -83,7 +82,7 @@ public class formatDates {
         return bewertung;
     }
 
-    public ArrayList<double[]> getRet() {
+    ArrayList<double[]> getRet() {
         return ret;
     }
 }

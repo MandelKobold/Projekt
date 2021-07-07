@@ -10,7 +10,7 @@ public class ErrorMessage extends JFrame implements ActionListener {
     JButton buttonCancel;
     JLabel errmsg;
 
-    public ErrorMessage(boolean usererror, String fehler){
+    ErrorMessage(boolean usererror, String fehler){
         fenster();
         addErrmsg(fehler);
         if(usererror){

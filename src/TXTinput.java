@@ -4,26 +4,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
-import java.lang.StringBuilder;
 
 public class TXTinput {
 
-    String csvFile;
+    private String csvFile;
 
-    BufferedReader br = null;
-    String line = "";
-    String cvsSplitBy = "\t";
-    public ArrayList<String[]> dates = new ArrayList<>();
+    private BufferedReader br = null;
+    private String line = "";
+    private String cvsSplitBy = "\t";
+    private ArrayList<String[]> dates = new ArrayList<>();
 
     public TXTinput() {
         //this.csvFile = "C:\\Users\\cicho\\Desktop\\SoftwareProjekt\\Softwareprojekt-main\\Daten\\scenario_1.csv";
         //this.csvFile = "G:\\Studium\\Semester4\\Softwareprojekt\\Projekt\\Daten\\scenario_1.csv";
     }
-    public TXTinput(String path) {
+    TXTinput(String path) {
         this.csvFile = path;
     }
-    public void read(){
+    void read(){
         try {
 
             br = new BufferedReader(new FileReader(csvFile));
@@ -91,7 +89,7 @@ public class TXTinput {
 
     }
 
-    public ArrayList<String[]> getDates() {
+    ArrayList<String[]> getDates() {
         return dates;
     }
 }

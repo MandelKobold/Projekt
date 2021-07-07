@@ -16,7 +16,7 @@ public class main {
             sonst:
                 Fehlermeldung
      */
-    public static rankacceptabilitymatrix ram = new rankacceptabilitymatrix();
+    private static rankacceptabilitymatrix ram = new rankacceptabilitymatrix();
 
     public static void main(String[] args) throws IOException {
         Boolean isMac = System.getProperty("os.name").contains("Mac");
@@ -143,7 +143,7 @@ public class main {
 
     }
 
-    public static void createAnalysis(CMAA cmaa){
+    private static void createAnalysis(CMAA cmaa){
         cmaa.compare();
         //NWA aufrufen mit zufälligen Werten aus der AGG
 
