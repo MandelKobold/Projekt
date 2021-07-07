@@ -56,10 +56,10 @@ public class main {
                 w.read();
                 formatDates form = new formatDates();
                 form.format(w.getDates());
-                if (!form.gewichtungenPruefen()) {
+                if (form.gewichtungenPruefen()) {
                     ErrorMessage er = new ErrorMessage(true, "Bitte die Gewichtungen Prüfen");
                     er.setVisible(true);
-                } else if (!form.bewertungenPruefen()) {
+                } else if (form.bewertungenPruefen()) {
                     ErrorMessage er = new ErrorMessage(true, "Bitte die Bewertungen Prüfen");
                     er.setVisible(true);
                 } else {
@@ -117,10 +117,10 @@ public class main {
                 w.read();
                 formatDates form = new formatDates();
                 form.format(w.getDates());
-                if (!form.gewichtungenPruefen()) {
+                if (form.gewichtungenPruefen()) {
                     ErrorMessage er = new ErrorMessage(true, "Bitte die Gewichtungen Prüfen");
                     er.setVisible(true);
-                } else if (!form.bewertungenPruefen()) {
+                } else if (form.bewertungenPruefen()) {
                     ErrorMessage er = new ErrorMessage(true, "Bitte die Bewertungen Prüfen");
                     er.setVisible(true);
                 } else {
