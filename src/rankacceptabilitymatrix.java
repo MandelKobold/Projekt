@@ -21,6 +21,10 @@ public class rankacceptabilitymatrix {
         }
     }
 
+    public rankacceptabilitymatrix() {
+
+    }
+
     //Die Daten, aus der NWA aufarbeiten
     int[][] ranking() {
 
