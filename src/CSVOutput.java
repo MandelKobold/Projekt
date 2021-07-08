@@ -53,11 +53,13 @@ class CSVOutput {
 
     void OutputCSVMAC(int[][] ram) throws IOException {
 
+        System.setProperty("apple.awt.fileDialogForDirectories", "true");
         FileDialog chooser = new FileDialog(new JFrame(), "", FileDialog.SAVE);
 
         ArrayList<String[]> datalines = createFile(ram);
 
         // Dialog zum Speichern von Dateien anzeigen
+        chooser.setDirectory(System.getProperty("user.home"));
         chooser.setVisible(true);
         String rueckgabeWertMAC = chooser.getDirectory() + chooser.getName();
 
@@ -80,6 +82,7 @@ class CSVOutput {
                 e.printStackTrace();
             }
         }
+        System.setProperty("apple.awt.fileDialogForDirectories", "true");
     }
 
 
