@@ -61,7 +61,8 @@ class CSVOutput {
         // Dialog zum Speichern von Dateien anzeigen
         chooser.setDirectory(System.getProperty("user.home"));
         chooser.setVisible(true);
-        String rueckgabeWertMAC = chooser.getDirectory() + chooser.getName();
+        String rueckgabeWertMAC = chooser.getFile();
+
 
 
         if (rueckgabeWertMAC != null) {
@@ -69,20 +70,24 @@ class CSVOutput {
 
             //testen, ob .csv dahinter geschrieben wurde und wenn nicht, das dann dahinter schreiben
             if (rueckgabeWertMAC.endsWith(".csv")) {
-                csvOutputFile = new File(rueckgabeWertMAC);
+                csvOutputFile = new File(chooser.getDirectory() + chooser.getFile());
             } else {
-                csvOutputFile = new File(rueckgabeWertMAC + ".csv");
+                csvOutputFile = new File(chooser.getDirectory() + chooser.getFile() + ".csv");
             }
 
             try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
                 datalines.stream()
                         .map(this::convertToCSV)
                         .forEach(pw::println);
+
             }catch (IOException e){
                 e.printStackTrace();
             }
+
         }
-        System.setProperty("apple.awt.fileDialogForDirectories", "true");
+        //System.setProperty("apple.awt.fileDialogForDirectories", "true");
+        System.exit(0);
+
     }
 
 

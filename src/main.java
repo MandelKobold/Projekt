@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
 
 public class main {
@@ -30,6 +31,7 @@ public class main {
                 //Datei einlesen
                 CSVinput w = new CSVinput(f.getPath());
                 w.read();
+
                 //Datei zum verarbeiten vorbereiten
                 formatDates form = new formatDates();
                 form.format(w.getDates());
@@ -82,12 +84,14 @@ public class main {
         }
         //wir haben einen mac :(
          else if (isMac == true) {
+
              //anderen filechooser verwenden
             FileDialog fd = new FileDialog(new JFrame(), "", FileDialog.LOAD);
             fd.setVisible(true);
             String filename = fd.getDirectory() + fd.getFile();
 
-            if (fd.getType().equals("csv")) {
+
+            if (filename.contains(".csv")) {
                 System.out.println("CSV");
                 //Datei einlesen
                 CSVinput w = new CSVinput(filename);
@@ -111,7 +115,7 @@ public class main {
                     CSVOutput ret = new CSVOutput();
                     ret.OutputCSVMAC(ram.getRankAcceptability());
                 }
-            } else if (fd.getType().equals("txt")) {
+            } else if (filename.contains(".txt")) {
                 System.out.println("TXT");
                 TXTinput w = new TXTinput(filename);
                 w.read();
